@@ -138,7 +138,7 @@
     <div class="contact-section">
       <h2>📩 Contact HW Quran Academy</h2>
       <p class="text-center text-muted mb-4">We’d love to hear from you! Fill out the form below and we’ll get back to you as soon as possible.</p>
-      <form>
+      <form onsubmit="sendmsg(event)">
         <div class="row g-3">
           <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Full Name" id="name" required>
@@ -147,7 +147,7 @@
             <input type="email" class="form-control" placeholder="Email Address" id="email" required>
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Phone Number" id="phone" required>
+            <input type="number" class="form-control" placeholder="Phone Number" id="phone" required>
           </div>
           <div class="col-md-6">
             <input type="text" class="form-control" placeholder="Subject" id="subject" required>
@@ -156,7 +156,7 @@
             <textarea class="form-control" rows="5" placeholder="Your Message..." id="massage" required></textarea>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-primary" onclick="sendmsg()">Send Message 🚀</button>
+            <button type="submit" class="btn btn-primary">Send Message 🚀</button>
           </div>
         </div>
       </form>

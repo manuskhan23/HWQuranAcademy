@@ -10,10 +10,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-console.log(app)
+const app = firebase.initializeApp(firebaseConfig);
+// console.log(app)
 const db = firebase.database();
-const auth=firebase.auth();
+// const auth=firebase.auth();
 const loginbtn=document.getElementById("login")
 const semail=document.getElementById("semail")
 const spassword=document.getElementById("spassword")
@@ -38,24 +38,40 @@ function sloginwithgoogle(){}
 function tloginwithgoogle(){}
 
 // contact
-function sendmsg(){
-const name=document.getElementById("name").value
-const email=document.getElementById("email").value
-const phone=document.getElementById("phone").value
-const subject=document.getElementById("subject").value
-const msg=document.getElementById("massage").value
+function sendmsg(event) {
+  event.preventDefault(); // Prevent form submission
 
-const c_obg={
-  name:name,
-  email:email,
-  phone:phone,
-  subject:subject,
-  massage:msg
-}
-console.log(c_obg)
+  // Get form values
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const subject = document.getElementById("subject").value;
+  const msg = document.getElementById("massage").value;
 
+  // Validate fields
+  if (!name || !email || !phone || !subject || !msg) {
+    alert("Please fill all fields");
+    return;
+  }
 
-//  send data
+  const contactData = {
+    name,
+    email, 
+    phone,
+    subject,
+    massage: msg,
+    timestamp: Date.now()
+  };
 
-firebase.database().ref("contact").push(c_obg);
+  // Send to Firebase
+  firebase.database().ref("contact").push(contactData)
+    .then(() => {
+      alert("Message sent successfully!");
+      // Clear form
+      document.querySelector("form").reset();
+    })
+    .catch(error => {
+      console.error("Error sending message:", error);
+      alert("Error sending message. Please try again.");
+    });
 }
