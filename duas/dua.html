@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Duas - Comprehensive Collection</title>
+      <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/auth.js"></script>
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <!-- Google Fonts for Arabic and English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=KFGQPC+Uthman+Taha+Naskh&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #1a5276;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #5d6d7e;
+            margin-bottom: 40px;
+        }
+
+        /* Search Bar and Suggestions Styling */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+        }
+
+        .suggestions-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none; /* Hidden by default */
+        }
+
+        .suggestion-item {
+            padding: 12px 25px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Dua Card Styling */
+        .dua-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid #0d6efd;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .dua-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .dua-title {
+            font-weight: 600;
+            color: #0d6efd;
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+        }
+
+        .dua-arabic {
+            font-family: 'KFGQPC Uthman Taha Naskh', 'Traditional Arabic', serif;
+            font-size: 1.8rem;
+            line-height: 2.5;
+            text-align: right;
+            color: #2c3e50;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #fdfdfd;
+            border-radius: 8px;
+        }
+
+        .dua-translation {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .dua-reference {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-top: 50px;
+        }
+        /* 🌐 Navbar + Dropdown Styling */
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background: #24292e;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.dropbtn:hover {
+  background: #2f363d;
+}
+
+/* Dropdown Menu Box */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Dropdown Links */
+.dropdown-content a {
+  color: #24292e;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Optional Hover Effect */
+.dropdown-content a:hover {
+  background: #f6f8fa;
+  padding-left: 22px;
+}
+
+/* Small Icons beside text */
+.dropdown-content a .icon {
+  font-size: 16px;
+}
+
+/* Divider inside dropdown */
+.dropdown-content hr {
+  border-top: 1px solid #e1e4e8;
+}
+.dropdown{
+  z-index: 
+  10000000000000000000;
+}
+/* Dropdown hover animation */
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  animation: 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both running slide-in-top;
+  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(0);
+  z-index: 100;
+}
+
+/* Optional animation keyframes (if you want smooth slide) */
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+    </style>
+</head>
+<body>
+<!-- nav -->
+ <nav class="navbar navbar-expand-lg bg-primary px-5">
+  <div class="container-fluid">
+    <img src="../images/logo.png" hight="50px" width="50px" style="border-radius: 50%; margin-right: 10px;" alt="">
+    <a class="navbar-brand" href="#" style="font-weight: bold ;">Hwquranacademy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../main pages/html/index.html">Home</a>
+      </li>
+      <!-- <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../duas/dua.html">🤲Dua (Prayer)</a>
+      </li> -->
+      <ul class="navbar-nav">
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Grammer & Translation</button>
+
+          <div class="dropdown-content">
+             <a href="../grammer/tarjuma.html"> Arabic Grammer</a>
+            <a href="../grammer/tarjuma.html"> Translation</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Pages</button>
+          <div class="dropdown-content">
+            <a href="../main pages/html/contact.html">Contact</a>
+            <a href="../main pages/html/about.html"> About</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Learning</button>
+          <div class="dropdown-content">
+            <a href="../login/html/t.html" class="mt-2 mx-2"><i class="icon">👨‍🏫</i> Teacher</a>
+            <a href="../login/html/s.html" class="mt-2 mx-2"><i class="icon">👤</i> Student</a>
+            <a href="../stories/main.html" class="mt-2 mx-2"><i class="icon">📚</i> Prophet Stories</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Allah & Prophet SAW names</button>
+
+          <div class="dropdown-content">
+            <a href="../allah and saw name/allah name.html
+              ">Allah names</a>
+            <a href="../allah and saw name/saw.html">Prophet SAW names</a>
+          </div>
+        </div>
+        <li class="nav-item" id="login">
+          <a class="mt-2 nav-link text-white" href="../mlogin.html"><i class="icon">🔑</i> Login</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="main-container">
+        <h1 class="page-title">Islamic Duas (Supplications)</h1>
+        <p class="page-subtitle">A collection of authentic Duas from the Quran and Sunnah</p>
+
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for a dua (e.g., morning, eating, travel, stress)..." autocomplete="off">
+            <div id="suggestionsList" class="suggestions-list"></div>
+        </div>
+
+        <div id="duaContainer">
+            <!-- Duas will be dynamically inserted here by JavaScript -->
+        </div>
+        <div id="noResults" class="no-results" style="display: none;">
+            No Duas found matching your search. Please try another keyword.
+        </div>
+    </div>
+
+    <!-- jQuery for easier DOM manipulation -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Comprehensive Dua Data (Expanded Collection)
+            const duas = [
+                { title: "Dua upon waking up", arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", translation: "All praise is for Allah who gave us life after having taken it from us and unto Him is the Resurrection.", reference: "Sahih al-Bukhari 6314" },
+                { title: "Dua before sleeping", arabic: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا", translation: "In Your name O Allah, I die and I live.", reference: "Sahih al-Bukhari 6315" },
+                { title: "Dua for sleeping (full)", arabic: "اللَّهُمَّ بِاسْمِكَ أَمُوتُ وَأَحْيَا. اللَّهُمَّ إِنَّكَ تَقْبَضُ رُوحِي عِنْدَ مَنَامِهَا وَتُرْسِلُهَا عِنْدَ يَقَظَتِهَا، فَتَقْبَضْهَا لَكَ رَاضِيًا بِقَبْضِهَا، وَتُرْسِلُهَا لَكَ رَاضِيًا بِإِرْسَالِهَا.", translation: "O Allah, in Your name I die and I live. O Allah, You take my soul at night and restore it to me in the morning. Take it at Your will and restore it at Your will, and make me pleased with it.", reference: "Ibn Majah 3879" },
+                { title: "Dua when wearing a garment", arabic: "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا (الثَّوْبَ) وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ", translation: "Praise is to Allah Who has clothed me with this garment and provided it for me without any might or power on my part.", reference: "Sahih al-Bukhari 3666" },
+                { title: "Dua for wearing a new garment", arabic: "اللَّهُمَّ لَكَ الْحَمْدُ، أَنْتَ كَسَوْتَنِيهِ، أَسْأَلُكَ مِنْ خَيْرِهِ وَخَيْرِ مَا صُنِعَ لَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا صُنِعَ لَهُ", translation: "O Allah, all praise is for You. You have clothed me with it. I ask You for its good and the good of what it was made for, and I seek refuge in You from its evil and the evil of what it was made for.", reference: "Abu Dawud 4020" },
+                { title: "Dua before eating", arabic: "بِسْمِ اللَّهِ وَبِرَكَاتِ اللَّهِ", translation: "In the name of Allah and with the blessings of Allah.", reference: "Jami` at-Tirmidhi 1858" },
+                { title: "Dua after eating", arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ", translation: "Praise is to Allah Who has given me this food and sustained me with it while I was unable to do so and had no power.", reference: "Sahih al-Bukhari 5459" },
+                { title: "Dua when forgetting to say Bismillah", arabic: "بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ", translation: "In the name of Allah at its beginning and its end.", reference: "Abu Dawud 3767" },
+                { title: "Dua when entering the home", arabic: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا", translation: "In the name of Allah we enter and in the name of Allah we leave, and upon our Lord we place our trust.", reference: "Abu Dawud 5096" },
+                { title: "Dua when leaving the home", arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", translation: "In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.", reference: "Abu Dawud 5095, At-Tirmidhi 3426" },
+                { title: "Dua for entering the mosque", arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", translation: "O Allah, open for me the doors of Your mercy.", reference: "Muslim 713" },
+                { title: "Dua for leaving the mosque", arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ", translation: "O Allah, I ask You from Your favor.", reference: "Muslim 713" },
+                { title: "Dua when entering the toilet", arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ", translation: "O Allah, I seek refuge in You from all impure things (male and female devils).", reference: "Sahih al-Bukhari 142, Sahih Muslim 375" },
+                { title: "Dua when leaving the toilet", arabic: "غُفْرَانَكَ", translation: "I seek Your forgiveness.", reference: "Abu Dawud 30, At-Tirmidhi 7" },
+                { title: "Dua for ablution (Wudu)", arabic: "نَوَيْتُ التَّوَضُّؤَ لِرَفْعِ الْحَدَثِ الأَصْغَرِ وَاسْتِبَاحَةِ الصَّلاَةِ", translation: "I intend to perform Wudu to remove minor impurity and to be able to pray.", reference: "This is the intention (Niyyah), a verbal mention is recommended." },
+                { title: "Dua after Wudu (Ablution)", arabic: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ. اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ", translation: "I bear witness that none has the right to be worshipped but Allah alone, with no partner, and I bear witness that Muhammad is His slave and Messenger. O Allah, make me of those who repent and make me of those who purify themselves.", reference: "At-Tirmidhi 55" },
+                { title: "Dua for Adhan (Call to Prayer)", arabic: "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ", translation: "O Allah, Lord of this perfect call and established prayer, grant Muhammad the Wasilah and a place of honor, and resurrect him in the praised station You have promised.", reference: "Sahih al-Bukhari 614" },
+                { title: "Dua for Istiftah (Opening Prayer)", arabic: "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ اغْسِلْنِي مِنْ خَطَايَايَ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ", translation: "O Allah, distance me from my sins as You have distanced the east from the west. O Allah, cleanse me of my sins as a white garment is cleansed of dirt.", reference: "Sahih al-Bukhari 744, Sahih Muslim 598" },
+                { title: "Dua for Ruku (Bowing)", arabic: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", translation: "Glory be to my Lord, the Most Great.", reference: "Sahih al-Bukhari 794, Sahih Muslim 472" },
+                { title: "Dua for rising from Ruku", arabic: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا لَكَ الْحَمْدُ، حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ", translation: "Allah hears those who praise Him. Our Lord, to You be all praise, a blessed and pure praise.", reference: "Sahih al-Bukhari 795" },
+                { title: "Dua for Sujood (Prostration)", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى", translation: "Glory be to my Lord, the Most High.", reference: "Sahih al-Bukhari 804, Sahih Muslim 473" },
+                { title: "Dua for Tashahhud", arabic: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", translation: "All compliments, prayers and good words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous slaves of Allah. I bear witness that none has the right to be worshipped but Allah, and I bear witness that Muhammad is His slave and His Messenger.", reference: "Sahih al-Bukhari 831, Sahih Muslim 402" },
+                { title: "Dua for Istighfar (Seeking Forgiveness)", arabic: "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ", translation: "I seek forgiveness from Allah, my Lord, besides whom there is no deity. He is the Ever-Living, the Sustainer of existence, and I turn to Him in repentance.", reference: "At-Tirmidhi 3577, Abu Dawud 1516" },
+                { title: "Dua for feeling stress or sorrow", arabic: "اللَّهُمَّ إِنِّي عَبْدُكَ ابْنُ عَبْدِكَ ابْنُ أَمَتِكَ... (full dua)", translation: "O Allah, I am Your slave, son of Your slave, son of Your female slave... (full translation)", reference: "Ahmad 1/391" },
+                { title: "Dua for anxiety and sorrow", arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْجُبْنِ وَالْبُخْلِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ", translation: "O Allah, I seek refuge in You from anxiety and sorrow, from weakness and laziness, from miserliness and cowardice, from being overcome by debt and from being overpowered by men.", reference: "Sahih al-Bukhari 2893" },
+                { title: "Dua for seeking knowledge", arabic: "اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي، وَعَلِّمْنِي مَا يَنْفَعُنِي، وَزِدْنِي عِلْمًا، الْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ، وَأَعُوذُ بِاللَّهِ مِنْ حَالِ أَهْلِ النَّارِ", translation: "O Allah, benefit me with what you have taught me, and teach me what will benefit me, and increase me in knowledge. Praise is to Allah in all circumstances, and I seek refuge in Allah from the condition of the people of the Hellfire.", reference: "At-Tirmidhi 3599" },
+                { title: "Dua for traveling", arabic: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ", translation: "Exalted is He who has subjected this to us, and we could not have it otherwise. Indeed, we, to our Lord, are returning.", reference: "Surah Az-Zukhruf (43:13-14)" },
+                { title: "Dua for returning from travel", arabic: "آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ", translation: "Returning, repenting, worshipping, and praising our Lord.", reference: "Sahih al-Bukhari 1797" },
+                { title: "Dua for rain (Istisqa)", arabic: "اللَّهُمَّ أَغِثْنَا، اللَّهُمَّ أَغِثْنَا، اللَّهُمَّ أَغِثْنَا", translation: "O Allah, give us rain, O Allah, give us rain, O Allah, give us rain.", reference: "Sahih al-Bukhari 1014" },
+                { title: "Dua for wind", arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا، وَشَرِّ مَا فِيهَا، وَشَرِّ مَا أُرْسِلَتْ بِهِ", translation: "O Allah, I ask You for its good, the good of what it contains, and the good of what it is sent with, and I seek refuge in You from its evil, the evil of what it contains, and the evil of what it is sent with.", reference: "Muslim 2085" },
+                { title: "Dua for a good dream", arabic: "الْحَمْدُ لِلَّهِ الَّذِي قَطَعَ عَنِّي الْبَلَاءَ", translation: "All praise is for Allah who has relieved me of the harm.", reference: "Sahih al-Bukhari 6987" },
+                { title: "Dua for a bad dream", arabic: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", translation: "I seek refuge in Allah from Satan, the accursed.", reference: "Sahih al-Bukhari 6985" },
+                { title: "Dua for sneezing", arabic: "الْحَمْدُ لِلَّهِ", translation: "All praise is for Allah.", reference: "Sahih al-Bukhari 6221" },
+                { title: "Dua for someone who sneezes", arabic: "يَرْحَمُكَ اللَّهُ", translation: "May Allah have mercy upon you.", reference: "Sahih al-Bukhari 6224" },
+                { title: "Dua for the one who says 'Yarhamuk Allah'", arabic: "يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ", translation: "May Allah guide you and rectify your condition.", reference: "Sahih al-Bukhari 6224" },
+                { title: "Dua when looking in the mirror", arabic: "اللَّهُمَّ كَمَا أَحْسَنْتَ خَلْقِي فَأَحْسِنْ خُلُقِي", translation: "O Allah, just as You have made my external features beautiful, make my character beautiful as well.", reference: "Ibn Majah 3745" },
+                { title: "Dua for parents", arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", translation: "My Lord, have mercy upon them as they brought me up when I was small.", reference: "Surah Al-Isra (17:24)" },
+                { title: "Dua for a newborn child", arabic: "أَعِيذُهُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ", translation: "I seek refuge for him in the perfect words of Allah from every devil and poisonous insect and from every evil eye.", reference: "Sahih al-Bukhari 3371" },
+                { title: "Dua for marriage (Nikah)", arabic: "بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ", translation: "May Allah bless you, and shower His blessings upon you, and unite you both in goodness.", reference: "Abu Dawud 2130, At-Tirmidhi 1091" },
+                { title: "Dua for visiting the sick", arabic: "لَا بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ", translation: "No harm will befall you. This is a purification (if Allah wills).", reference: "Sahih al-Bukhari 5650" },
+                { title: "Dua for debt", arabic: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ", translation: "O Allah, suffice me with what You have allowed instead of what You have forbidden, and make me independent of all others besides You.", reference: "At-Tirmidhi 3563" },
+                { title: "Dua for when you feel tempted", arabic: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", translation: "I seek refuge in Allah from Satan, the accursed.", reference: "Surah Al-A'raf (7:200)" },
+                { title: "Dua for entering a marketplace", arabic: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ حَيٌّ لَا يَمُوتُ، بِيَدِهِ الْخَيْرُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", translation: "None has the right to be worshipped but Allah alone, Who has no partner. His is the dominion and His is the praise. He gives life and causes death, and He is living and does not die. In His Hand is all good, and He has power over all things.", reference: "Sahih al-Bukhari 2331, Muslim 2071" },
+                { title: "Dua for the deceased at the funeral", arabic: "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ، وَأَبْدِلْهُ دَارًا خَيْرًا مِنْ دَارِهِ، وَأَهْلًا خَيْرًا مِنْ أَهْلِهِ، وَزَوْجًا خَيْرًا مِنْ زَوْجِهِ، وَأَدْخِلْهُ الْجَنَّةَ، وَأَعِذْهُ مِنْ عَذَابِ الْقَبْرِ وَمِنْ عَذَابِ النَّارِ", translation: "O Allah, forgive him and have mercy on him, keep him safe and sound and pardon him. Honor his resting place, make his entrance wide, wash him with water and snow and hail, and cleanse him of sin as a white garment is cleansed of dirt. Give him a house better than his house and a family better than his family and a wife better than his wife. Admit him to Paradise and protect him from the torment of the grave and the torment of Hell-fire.", reference: "Sahih Muslim 975" },
+                { title: "Dua for the last 10 nights of Ramadan", arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.", reference: "Ibn Majah 3850, At-Tirmidhi 3513" },
+                { title: "Dua for Laylat al-Qadr", arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", translation: "O Allah, You are Forgiving and love forgiveness, so forgive me.", reference: "Ibn Majah 3850, At-Tirmidhi 3513" },
+                { title: "Dua for Qunut in Witr", arabic: "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، فَإِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ، وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ", translation: "O Allah, guide me with those whom You have guided, strengthen me with those whom You have given strength, take care of me with those whom You have taken care of, bless me in what You have given me, protect me from the evil of what You have decreed, for verily You decree and none can decree over You. Verily, he is not humbled whom You have befriended, and none is honored whom You are at war with. Blessed are You, O Lord, and Exalted.", reference: "An-Nasa'i 1745, Abu Dawud 1425" },
+                { title: "Dua for protection from evil eye", arabic: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ شَرِّ مَا خَلَقَ", translation: "I seek refuge in the perfect words of Allah from the evil of what He has created.", reference: "Sahih Muslim 2709" },
+                { title: "Dua for protection from Shaitan", arabic: "أَعُوذُ بِاللَّهِ السَّمِيعِ الْعَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ مِنْ هَمْزِهِ وَنَفْخِهِ وَنَفْثِهِ", translation: "I seek refuge in Allah, the All-Hearing, the All-Knowing, from the accursed Satan, from his pride, his poetry, and his madness.", reference: "Sahih al-Bukhari 3281, Muslim 2204" },
+                { title: "Dua for the dead in the grave", arabic: "اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي، وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ", translation: "O Allah, rectify my religion for me, which is the safeguard of my affairs. Rectify my worldly affairs wherein is my livelihood. Rectify my Hereafter wherein is my ultimate return. Make my life a means of increase for me in all good, and make my death a respite for me from all evil.", reference: "Muslim 2720" },
+                { title: "Dua for a good omen", arabic: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا، وَأَنْتَ تَجْعَلُ الْحَزَنَ إِذَا شِئْتَ سَهْلًا", translation: "O Allah, there is no ease except what You make easy. And You make the difficult easy if You will.", reference: "Ibn Hibban 2427" }
+            ];
+
+            const $searchInput = $('#searchInput');
+            const $suggestionsList = $('#suggestionsList');
+            const $duaContainer = $('#duaContainer');
+            const $noResults = $('#noResults');
+
+            // Function to display Duas
+            function displayDuas(duasToShow) {
+                $duaContainer.empty();
+                if (duasToShow.length === 0) {
+                    $noResults.show();
+                } else {
+                    $noResults.hide();
+                    duasToShow.forEach(dua => {
+                        const duaCard = `
+                            <div class="dua-card">
+                                <h3 class="dua-title">${dua.title}</h3>
+                                <p class="dua-arabic">${dua.arabic}</p>
+                                <p class="dua-translation">"${dua.translation}"</p>
+                                <p class="dua-reference"><strong>Reference:</strong> ${dua.reference}</p>
+                            </div>
+                        `;
+                        $duaContainer.append(duaCard);
+                    });
+                }
+            }
+
+            // Function to show suggestions
+            function showSuggestions(duasToShow) {
+                $suggestionsList.empty();
+                if (duasToShow.length > 0) {
+                    const uniqueTitles = [...new Set(duasToShow.map(dua => dua.title))];
+                    uniqueTitles.forEach(title => {
+                        const suggestionItem = `<div class="suggestion-item">${title}</div>`;
+                        $suggestionsList.append(suggestionItem);
+                    });
+                    $suggestionsList.show();
+                } else {
+                    $suggestionsList.hide();
+                }
+            }
+
+            // Event listener for search input
+            $searchInput.on('input', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                if (searchTerm.length === 0) {
+                    $suggestionsList.hide();
+                    displayDuas(duas); // Show all if search is empty
+                    return;
+                }
+                const filteredDuas = duas.filter(dua => {
+                    return dua.title.toLowerCase().includes(searchTerm) ||
+                           dua.translation.toLowerCase().includes(searchTerm) ||
+                           dua.reference.toLowerCase().includes(searchTerm);
+                });
+                displayDuas(filteredDuas);
+                showSuggestions(filteredDuas);
+            });
+
+            // Event listener for clicking a suggestion
+            $suggestionsList.on('click', '.suggestion-item', function() {
+                const selectedTitle = $(this).text();
+                $searchInput.val(selectedTitle);
+                $suggestionsList.hide();
+                const selectedDua = duas.filter(dua => dua.title === selectedTitle);
+                displayDuas(selectedDua);
+            });
+
+            // Hide suggestions when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.search-wrapper').length) {
+                    $suggestionsList.hide();
+                }
+            });
+
+            // Initial display of all Duas
+            displayDuas(duas);
+        });
+    </script>
+    <footer style="background-color:#0d0d0d; color:#fff; font-family:'Segoe UI',Arial,sans-serif; padding:60px 20px 20px; border-top:3px solid #0d6efd; box-shadow:0 -3px 15px rgba(0,0,0,0.3);">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="row" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+
+      <!-- Logo & About -->
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h2 style="font-weight:700; color:#0d6efd;">Hw Quran Academy</h2>
+        <p style="color:#aaa; line-height:1.8; margin-top:15px;">
+          A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with 
+          qualified teachers. Empowering students with understanding of the Holy Quran.
+        </p>
+        <p style="margin-top:10px;">📍 Online Global Platform</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div style="flex:1 1 180px; min-width:160px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <!-- <li><a href="../main pages/html/index.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">🏠 Home</a></li> -->
+          <li><a href="../stories/main.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📖 Prophet Stories</a></li>
+          <li><a href="../grammer/grammer.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📚 Arabic Grammar</a></li>
+          <li><a href="../grammer/tarjuma.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📜 Quran Translation</a></li>
+          <li><a href="../main pages/html/contact.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📞 Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div style="flex:1 1 200px; min-width:180px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Contact</h4>
+        <p style="margin:8px 0;">✉️ info@hwquranacademy.com</p>
+        <p style="margin:8px 0;">🌐 https://hwquranacademy.netlify.app/</p>
+      </div>
+
+      
+    <!-- Divider -->
+    <hr style="border-color:rgba(255,255,255,0.1); margin:30px 0;">
+
+    <!-- Bottom Footer -->
+    <div style="text-align:center; color:#777; font-size:14px;">
+      © 2025 <strong>Hw Quran Academy</strong> — All Rights Reserved | Designed with ❤️ for Islamic Education
+    </div>
+  </div>
+</footer>
+</body>
+<script src="../auth.js"></script>
+</html>

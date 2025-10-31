@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"
+    integrity="sha512-pYd2QwnzV9JgtoARJf1Ui1q5+p1WHpeAz/M0sUJNprhDviO4zRo12GLlk4/sKBRUCtMHEmjgqo5zcrn8pkdhmQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/auth.js"></script>
+  <link rel="shortcut icon" href="../../images/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../../bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+</head>
+
+<body id="mn">
+  <!-- <div style="z-index: 1000;" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> -->
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg bg-primary px-5">
+  <div class="container-fluid">
+    <img src="../../images/logo.png" hight="50px" width="50px" style="border-radius: 50%; margin-right: 10px;" alt="">
+    <a class="navbar-brand" href="#" style="font-weight: bold ;">Hwquranacademy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      
+    <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../../duas/dua.html">🤲Dua (Prayer)</a>
+      </li>
+      <ul class="navbar-nav">
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Grammer & Tarjuma</button>
+
+          <div class="dropdown-content">
+            <a href="../../grammer/grammer.html
+              ">Arabic Grammer</a>
+            <a href="../../grammer/tarjuma.html"> Quran Translation</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Pages</button>
+          <div class="dropdown-content">
+            <a href="contact.html">Contact</a>
+            <a href="about.html"> About</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Learning</button>
+          <div class="dropdown-content">
+            <a href="../../login/html/t.html" class="mt-2 mx-2"><i class="icon">👨‍🏫</i> Teacher</a>
+            <a href="../../login/html/s.html" class="mt-2 mx-2"><i class="icon">👤</i> Student</a>
+            <a href="../../stories/main.html" class="mt-2 mx-2"><i class="icon">📚</i> Prophet Stories</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Allah & Prophet SAW names</button>
+
+          <div class="dropdown-content">
+            <a href="../../allah and saw name/allah name.html
+              ">Allah names</a>
+            <a href="../../allah and saw name/saw.html">Prophet SAW names</a>
+          </div>
+        </div>
+        <li class="nav-item" id="login">
+          <a class="mt-2 nav-link text-white" href="../../mlogin.html"><i class="icon">🔑</i> Login</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- carousal by bootstrap with images and text -->
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../../images/Quran1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        Teachers</h5>
+        <p>Find student for good beeds and <br>for teaching <span style="font-weight: 900;">QURAN MAJEED.</span></p>
+        <a href="../../login/html/t.html"><button class="btn-primary btn px-5">Go!</button></a>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="../../images/quran2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>for Students</h5>
+        <p>Find tutor for your child <br>for learning <span style="font-weight: 900;">QURAN MAJEED.</span></p>
+        <a href="../../login/html/s.html"><button class="btn-primary btn px-5">Go!</button></a>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- Benefits Section -->
+<div class="container mt-5 pt-5">
+  <h1 class="text-center text-primary fw-bold mb-5">✨ Benefits of Quran Academy</h1>
+
+  <div class="row g-4">
+    <!-- Students Card -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h3 class="text-success mb-4 text-center">
+            <i class="fas fa-user-graduate me-2"></i> Benefits for Students
+          </h3>
+          <ol class="list-group list-group-numbered list-group-flush">
+            <li class="list-group-item">
+              For students, learning in a Quran Academy provides a calming effect that helps reduce anxiety and
+              stress.
+              The rhythm of Quranic recitation has a soothing influence on the mind, allowing learners to feel more
+              emotionally
+              balanced and at peace. This emotional stability helps students manage academic pressure and personal
+              challenges
+              more effectively.
+            </li>
+            <li class="list-group-item">
+              Another major benefit is improved concentration and memory. Memorizing and understanding Quranic
+              verses
+              requires mental discipline, which strengthens cognitive abilities such as focus, recall, and
+              analytical thinking.
+              These sharpened skills often carry over into other academic subjects and everyday problem-solving.
+            </li>
+            <li class="list-group-item">
+              Students also gain a stronger sense of identity and self-confidence. By connecting with spiritual
+              values,
+              they develop inner strength, patience, and resilience. This sense of purpose reduces uncertainty and
+              supports
+              healthier social interactions and decision-making.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teachers Card -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h3 class="text-primary mb-4 text-center">
+            <i class="fas fa-chalkboard-teacher me-2"></i> Benefits for Teachers
+          </h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              For teachers, a Quran Academy brings deep fulfillment and a sustained sense of purpose. Teaching
+              sacred knowledge
+              offers spiritual reward and personal meaning, which supports mental well-being and reduces feelings of
+              aimlessness.
+              This meaningful work often boosts motivation and overall life satisfaction.
+            </li>
+            <li class="list-group-item">
+              Another key benefit is the development of patience and empathy. Working regularly with diverse
+              students strengthens
+              a teacher’s ability to understand, encourage, and guide others. Those qualities lead to calmer
+              reactions, improved
+              emotional regulation, and a more resilient mindset when facing work-related challenges.
+            </li>
+            <li class="list-group-item">
+              Finally, teachers experience psychological comfort from community and recognition. Being part of a
+              like-minded,
+              supportive environment decreases stress and fosters collaboration. Appreciation from students and
+              families
+              reinforces a teacher’s sense of impact and value, improving long-term wellbeing.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- prophet stories -->
+<div class="container my-5">
+  <div class="row align-items-center">
+
+    <!-- Left Side: Quran Image -->
+    <div class="col-md-6 text-center mb-4 mb-md-0">
+      <img src="../../images/prophet1.jpg" style="height: 900px;" alt="Quran Image" class="img-fluid rounded shadow">
+    </div>
+
+    <!-- Right Side: Text -->
+    <div class="col-md-6">
+      <h2 class="fw-bold text-primary mb-3">🌙 Prophet Stories</h2>
+      <p class="text-muted" style="text-align: justify;">
+        Prophet Stories are a source of endless wisdom and guidance for Muslims of every generation.
+        Each story reflects the struggles, challenges, and victories faced by the Prophets of Allah
+        and shows how patience, faith, and determination can change the course of human life.
+        From the story of Prophet Ibrahim (A.S.) who demonstrated unwavering trust in Allah,
+        to Prophet Musa (A.S.) who stood firm against oppression, and Prophet Muhammad (PBUH)
+        whose life remains the perfect model of mercy and justice — every narrative is filled
+        with timeless lessons. <br><br>
+
+        These stories not only strengthen our faith but also provide psychological comfort
+        and peace. Reading them helps us understand that difficulties are a part of life
+        and with trust in Allah, every difficulty can turn into an opportunity. For students,
+        Prophet Stories bring motivation to stay honest, hardworking, and respectful.
+        For families, they teach values of unity, compassion, and gratitude. And for
+        society as a whole, they serve as reminders of justice, humility, and forgiveness. <br><br>
+
+        In a world full of distractions, the Prophet Stories connect us back to our roots.
+        They give us role models who faced the toughest trials yet remained firm in their faith.
+        By learning about their sacrifices, we discover a roadmap for leading a purposeful,
+        balanced, and spiritually fulfilling life. Prophet Stories are not just history;
+        they are living lessons meant to guide our present and shape our future.
+      </p>
+      <!-- Button -->
+      <a href="../../stories/main.html" class="btn btn-success btn-lg mt-3 px-4">
+        View Prophet Stories <i class="fas fa-book-reader ms-2"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- grammer -->
+ <section class="container">
+  <div class="story-card row g-0 align-items-center">
+    <!-- Text column (left on large screens) -->
+    <div class="col-12 col-lg-7 order-1 order-lg-1">
+      <div class="story-content">
+        <h2 class="story-title">Arabic Grammar — Foundation for Quranic Understanding</h2>
+
+        <p class="story-text">
+          Arabic Grammar (نحو و صرف) is the backbone of understanding the Qur’an. It teaches how words change meaning
+          according to context, structure, and diacritics. In a Quran Academy, grammar training helps students not only recite
+          accurately but also interpret verses with clarity. When learners grasp how verbs shift with tense, or how nouns relate
+          by case and construct, the message of the Qur’an becomes clearer and more profound.
+        </p>
+
+        <p class="story-text">
+          The study splits mainly into <strong>Nahw</strong> (syntax) and <strong>Sarf</strong> (morphology). Nahw explains sentence
+          structure — how words connect and affect each other — while Sarf explains root-pattern derivations and verb forms.
+          Together these sciences empower the student to read classical Arabic with confidence and to appreciate the linguistic
+          precision, rhythm, and eloquence found in the Qur’an.
+        </p>
+
+        <p class="story-text">
+          At the Academy, grammar is taught through practical examples drawn from the Qur’an itself: verses are parsed, sentence
+          roles are identified, and morphological patterns are highlighted. This approach not only develops linguistic mastery but
+          also deepens spiritual connection, because each grammatical rule reveals part of the divine harmony in Allah’s speech.
+          Mastering Arabic grammar therefore supports both intellectual clarity and heartfelt understanding.
+        </p>
+
+        <span class="story-arabic">
+          قِراءَةُ الْقُرْآنِ وَفَهْمُهُ يَتَطَلَّبَانِ مَعْرفةَ النَّحْوِ وَالصَّرْفِ؛ فَفَهْمُ الإِعْرَابِ يُنِيْرُ دَلالَةَ الكَلِمَاتِ
+        </span>
+
+        <div class="story-cta">
+          <a href="../../grammer/grammer.html" class="btn btn-primary me-2">Read Grammar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image column (right on large screens) -->
+    <div class="col-12 col-lg-5 order-2 order-lg-2">
+      <!-- Replace the src with your real image path -->
+      <img src="../../images/GRAMMER.png" alt="Arabic grammar illustration" height="500px" class="story-img">
+    </div>
+  </div>
+</section>
+<section class="container">
+  <div class="translation-card row g-0 align-items-center">
+    <!-- Image column (left on large screens) -->
+    <div class=" col-lg-5 order-1 order-lg-1">
+      <!-- Replace src with your real image -->
+      <img src="../../images/TRANSLATION.png" alt="Quran Translation" class="translation-img">
+    </div>
+
+    <!-- Text column (right on large screens) -->
+    <div class="col-12 col-lg-7 order-2 order-lg-2">
+      <div class="translation-content">
+        <h2 class="translation-title">Quran Translation — Bridge of Understanding</h2>
+
+        <p class="translation-text">
+          Quran Translation is a doorway for non-Arabic speakers to access the divine message of Allah. It allows
+          believers from every culture and background to understand the meanings of the Qur’an in their own language.
+          While the Qur’an in Arabic is unmatched in beauty and precision, translations provide guidance and clarity
+          for reflection and practice.
+        </p>
+
+        <p class="translation-text">
+          Through translations, learners explore the timeless wisdom, laws, and spiritual lessons of the Qur’an. Every
+          translated verse carries a reflection of divine guidance — teaching faith, patience, morality, and compassion.
+          This makes the Qur’an accessible to millions across the world, connecting humanity to the Creator’s message.
+        </p>
+
+        <p class="translation-text">
+          In Quran Academies, translations are paired with the original Arabic text so that students can compare,
+          reflect, and learn both linguistically and spiritually. This approach helps develop a balance: gaining
+          understanding from translation while still appreciating the unmatched depth of the original Arabic revelation.
+        </p>
+
+        <span class="translation-arabic">
+          إِنَّ هَـٰذَا ٱلۡقُرۡءَانَ يَهۡدِي لِلَّتِي هِيَ أَقۡوَمُ وَيُبَشِّرُ ٱلۡمُؤۡمِنِينَ ٱلَّذِينَ يَعۡمَلُونَ
+          ٱلصَّـٰلِحَـٰتِ أَنَّ لَهُمۡ أَجۡرٗا كَبِيرٗا
+        </span>
+        <div class="translation-cta"><br>
+          <a href="../../grammer/tarjuma.html" class="btn btn-primary me-2">Read Translation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Dua Section -->
+<section class="container my-5">
+  <div class="translation-card row g-0 align-items-center">
+
+    <!-- Text column (Left side) -->
+    <div class="col-12 col-lg-7 order-2 order-lg-1">
+      <div class="translation-content p-4 py-5 my-5">
+        <h2 class="translation-title text-primary fw-bold">🤲 Dua — The Power of Supplication</h2>
+
+        <p class="translation-text text-muted" style="text-align: justify;">
+          Dua (Prayer) is the believer’s most powerful weapon — a direct, personal link between the servant and Allah ﷻ.  
+          Through Dua, hearts find peace, anxieties melt away, and faith becomes firm. Every raised hand is a whisper to 
+          the One who listens, loves, and responds.
+        </p>
+
+        <p class="translation-text text-muted" style="text-align: justify;">
+          At <strong>Hw Quran Academy</strong>, we teach students the beauty and meanings behind every Dua — not only how to 
+          recite them, but when and why to say them. Whether it’s the prayer before sleeping, traveling, or seeking 
+          forgiveness, each supplication strengthens the bond between a believer and his Creator.
+        </p>
+
+        <span class="translation-arabic d-block mt-3" 
+              style="font-size: 22px; font-family: 'Scheherazade New', serif; color: #2c1810;">
+          وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ
+        </span>
+        <p class="text-muted" style="font-size: 14px;">
+          “And your Lord says: Call upon Me; I will respond to you.” — (Qur’an 40:60)
+        </p>
+
+        <div class="translation-cta mt-3">
+          <a href="../../duas/dua.html" class="btn btn-primary px-4 py-2">Read Duas</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image column (Right side) -->
+    <div class="col-lg-5 order-1 order-lg-2">
+      <img src="../../images/dua.png"
+           alt="Hands raised in prayer"
+           class="translation-img rounded shadow"
+           style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+
+<!-- Apple Style Footer -->
+<footer style="background-color:#0d0d0d; color:#fff; font-family:'Segoe UI',Arial,sans-serif; padding:60px 20px 20px; border-top:3px solid #0d6efd; box-shadow:0 -3px 15px rgba(0,0,0,0.3);">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="row" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+
+      <!-- Logo & About -->
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h2 style="font-weight:700; color:#0d6efd;">Hw Quran Academy</h2>
+        <p style="color:#aaa; line-height:1.8; margin-top:15px;">
+          A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with 
+          qualified teachers. Empowering students with understanding of the Holy Quran.
+        </p>
+        <p style="margin-top:10px;">📍 Online Global Platform</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div style="flex:1 1 180px; min-width:160px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <!-- <li><a href="../main pages/html/index.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">🏠 Home</a></li> -->
+          <li><a href="../../stories/main.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📖 Prophet Stories</a></li>
+          <li><a href="../../grammer/grammer.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📚 Arabic Grammar</a></li>
+          <li><a href="../../grammer/tarjuma.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📜 Quran Translation</a></li>
+          <li><a href="contact.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📞 Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div style="flex:1 1 200px; min-width:180px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Contact</h4>
+        <p style="margin:8px 0;">✉️ info@hwquranacademy.com</p>
+        <p style="margin:8px 0;">🌐 https://hwquranacademy.netlify.app/</p>
+      </div>
+
+      
+    <!-- Divider -->
+    <hr style="border-color:rgba(255,255,255,0.1); margin:30px 0;">
+
+    <!-- Bottom Footer -->
+    <div style="text-align:center; color:#777; font-size:14px;">
+      © 2025 <strong>Hw Quran Academy</strong> — All Rights Reserved | Designed with ❤️ for Islamic Education
+    </div>
+  </div>
+</footer>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+<script src="../../auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="../../bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+
+</html>

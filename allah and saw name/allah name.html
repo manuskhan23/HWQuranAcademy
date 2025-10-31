@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allah’s Names | Hwquranacademy</title>
+  <style>
+        body {
+      background: radial-gradient(circle at top, #fff8e1, #ffffff);
+      font-family: 'Scheherazade New', 'Segoe UI', serif;
+      color: #2c1810;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #b8860b;
+      margin-top: 40px;
+      font-size: 38px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(184, 134, 11, 0.4);
+    }
+
+    /* 🌟 Container grid */
+    .names-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      justify-items: center;
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* 🌟 Golden Badge Style */
+    .badge-card {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffd700, #b8860b);
+      box-shadow: 0 10px 25px rgba(184, 134, 11, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #2c1810;
+      transition: all 0.3s ease;
+    }
+
+    .badge-card:hover {
+      transform: scale(1.08);
+      background: linear-gradient(160deg, #ffea70, #b8860b);
+      color: #fff;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+
+    .arabic {
+      font-size: 32px;
+      font-weight: bold;
+      font-family: 'Scheherazade New', serif;
+    }
+
+    .english {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .badge-card {
+        width: 180px;
+        height: 180px;
+      }
+      .arabic { font-size: 26px; }
+    }
+/* 🌐 Navbar + Dropdown Styling */
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background: #24292e;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.dropbtn:hover {
+  background: #2f363d;
+}
+
+/* Dropdown Menu Box */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+  overflow: hidden;
+}
+#e {
+      text-align: center;
+      color: #b8860b;
+      margin-top: 40px;
+      font-size: 38px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(184, 134, 11, 0.4);
+    }
+/* Dropdown Links */
+.dropdown-content a {
+  color: #24292e;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Optional Hover Effect */
+.dropdown-content a:hover {
+  background: #f6f8fa;
+  padding-left: 22px;
+}
+
+/* Small Icons beside text */
+.dropdown-content a .icon {
+  font-size: 16px;
+}
+
+/* Divider inside dropdown */
+.dropdown-content hr {
+  border-top: 1px solid #e1e4e8;
+}
+
+/* Dropdown hover animation */
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  animation: 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both running slide-in-top;
+  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(0);
+}
+
+/* Optional animation keyframes (if you want smooth slide) */
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+  </style>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/auth.js"></script>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body>
+  <!-- navbar -->
+<nav class="navbar navbar-expand-lg bg-primary px-5">
+  <div class="container-fluid">
+    <img src="../images/logo.png" hight="50px" width="50px" style="border-radius: 50%; margin-right: 10px;" alt="">
+    <a class="navbar-brand" href="#" style="font-weight: bold ;">Hwquranacademy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../main pages/html/index.html">Home</a>
+      </li>
+      
+    <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../duas/dua.html">🤲Dua (Prayer)</a>
+      </li>
+      <ul class="navbar-nav">
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Grammer & Tarjuma</button>
+
+          <div class="dropdown-content">
+            <a href="../grammer/grammer.html
+              ">Arabic Grammer</a>
+            <a href="../grammer/tarjuma.html"> Quran Translation</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Pages</button>
+          <div class="dropdown-content">
+            <a href="../main pages/html/contact.html">Contact</a>
+            <a href="../main pages/html/about.html"> About</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Learning</button>
+          <div class="dropdown-content">
+            <a href="../login/html/t.html" class="mt-2 mx-2"><i class="icon">👨‍🏫</i> Teacher</a>
+            <a href="../login/html/s.html" class="mt-2 mx-2"><i class="icon">👤</i> Student</a>
+            <a href="../stories/main.html" class="mt-2 mx-2"><i class="icon">📚</i> Prophet Stories</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Allah & Prophet SAW names</button>
+
+          <div class="dropdown-content">
+            <a href="saw.html
+              ">prophet SAW name</a>
+            <!-- <a href="../grammer/tarjuma.html"> Quran Translation</a> -->
+          </div>
+        </div>
+        <!-- <li class="nav-item" id="login">
+          <a class="mt-2 nav-link text-white" href="../mlogin.html" ><i class="icon">🔑</i> Login</a>
+        </li> -->
+
+
+      </ul>
+    </div>
+  </div>
+</nav><br><br>
+  <h1 id="e">اَسْمَاءُ الْحُسْنَىٰ — The 99 Names of Allah</h1>
+
+  <div class="names-container">
+    <div class='badge-card'>
+      <div class='arabic'>ٱللّٰهُ</div>
+      <div class='english'>Allah — The God</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّحْمَـٰنُ</div>
+      <div class='english'>Ar-Rahman — The Most Merciful</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّحِيمُ</div>
+      <div class='english'>Ar-Rahim — The Compassionate</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمَلِكُ</div>
+      <div class='english'>Al-Malik — The King</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقُدُّوسُ</div>
+      <div class='english'>Al-Quddus — The Most Holy</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلسَّلَامُ</div>
+      <div class='english'>As-Salam — The Source of Peace</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُؤْمِنُ</div>
+      <div class='english'>Al-Mu'min — The Giver of Faith</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُهَيْمِنُ</div>
+      <div class='english'>Al-Muhaymin — The Protector</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَزِيزُ</div>
+      <div class='english'>Al-Aziz — The Almighty</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْجَبَّارُ</div>
+      <div class='english'>Al-Jabbar — The Compeller</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُتَكَبِّرُ</div>
+      <div class='english'>Al-Mutakabbir — The Supreme</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْخَالِقُ</div>
+      <div class='english'>Al-Khaliq — The Creator</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَارِئُ</div>
+      <div class='english'>Al-Bari' — The Evolver</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُصَوِّرُ</div>
+      <div class='english'>Al-Musawwir — The Fashioner</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْغَفَّارُ</div>
+      <div class='english'>Al-Ghaffar — The Forgiving</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقَهَّارُ</div>
+      <div class='english'>Al-Qahhar — The Subduer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَهَّابُ</div>
+      <div class='english'>Al-Wahhab — The Bestower</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّزَّاقُ</div>
+      <div class='english'>Ar-Razzaq — The Provider</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْفَتَّاحُ</div>
+      <div class='english'>Al-Fattah — The Opener</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَلِيمُ</div>
+      <div class='english'>Al-Alim — The All-Knowing</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقَابِضُ</div>
+      <div class='english'>Al-Qabid — The Withholder</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَاسِطُ</div>
+      <div class='english'>Al-Basit — The Expander</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْخَافِضُ</div>
+      <div class='english'>Al-Khafid — The Abaser</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّافِعُ</div>
+      <div class='english'>Ar-Rafi' — The Exalter</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُعِزُّ</div>
+      <div class='english'>Al-Mu'izz — The Honourer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُذِلُّ</div>
+      <div class='english'>Al-Mudhill — The Dishonourer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلسَّمِيعُ</div>
+      <div class='english'>As-Sami' — The All-Hearing</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَصِيرُ</div>
+      <div class='english'>Al-Basir — The All-Seeing</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَكَمُ</div>
+      <div class='english'>Al-Hakam — The Judge</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَدْلُ</div>
+      <div class='english'>Al-Adl — The Just</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱللَّطِيفُ</div>
+      <div class='english'>Al-Latif — The Gentle</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْخَبِيرُ</div>
+      <div class='english'>Al-Khabir — The All-Aware</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَلِيمُ</div>
+      <div class='english'>Al-Halim — The Forbearing</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَظِيمُ</div>
+      <div class='english'>Al-Azim — The Magnificent</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْغَفُورُ</div>
+      <div class='english'>Al-Ghafur — The Forgiver</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلشَّكُورُ</div>
+      <div class='english'>Ash-Shakur — The Appreciative</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَلِيُّ</div>
+      <div class='english'>Al-Ali — The Most High</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْكَبِيرُ</div>
+      <div class='english'>Al-Kabir — The Great</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَفِيظُ</div>
+      <div class='english'>Al-Hafiz — The Preserver</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُقِيتُ</div>
+      <div class='english'>Al-Muqit — The Nourisher</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَسِيبُ</div>
+      <div class='english'>Al-Hasib — The Reckoner</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْجَلِيلُ</div>
+      <div class='english'>Al-Jalil — The Majestic</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْكَرِيمُ</div>
+      <div class='english'>Al-Karim — The Generous</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّقِيبُ</div>
+      <div class='english'>Ar-Raqib — The Watchful</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُجِيبُ</div>
+      <div class='english'>Al-Mujib — The Responsive</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَاسِعُ</div>
+      <div class='english'>Al-Wasi' — The All-Encompassing</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَكِيمُ</div>
+      <div class='english'>Al-Hakim — The Wise</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَدُودُ</div>
+      <div class='english'>Al-Wadud — The Loving</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمَجِيدُ</div>
+      <div class='english'>Al-Majid — The Glorious</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَاعِثُ</div>
+      <div class='english'>Al-Ba'ith — The Resurrector</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلشَّهِيدُ</div>
+      <div class='english'>Ash-Shaheed — The Witness</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَقُّ</div>
+      <div class='english'>Al-Haqq — The Truth</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَكِيلُ</div>
+      <div class='english'>Al-Wakil — The Trustee</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقَوِيُّ</div>
+      <div class='english'>Al-Qawiyy — The Strong</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمَتِينُ</div>
+      <div class='english'>Al-Matin — The Firm</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَلِيُّ</div>
+      <div class='english'>Al-Wali — The Protecting Friend</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَمِيدُ</div>
+      <div class='english'>Al-Hamid — The Praiseworthy</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُحْصِيُ</div>
+      <div class='english'>Al-Muhsi — The Reckoner</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُبْدِئُ</div>
+      <div class='english'>Al-Mubdi — The Originator</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُعِيدُ</div>
+      <div class='english'>Al-Mu'id — The Restorer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُحْيِيُ</div>
+      <div class='english'>Al-Muhyi — The Giver of Life</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُمِيتُ</div>
+      <div class='english'>Al-Mumit — The Taker of Life</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْحَيُّ</div>
+      <div class='english'>Al-Hayy — The Ever-Living</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقَيُّومُ</div>
+      <div class='english'>Al-Qayyum — The Sustainer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَاجِدُ</div>
+      <div class='english'>Al-Wajid — The Finder</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمَاجِدُ</div>
+      <div class='english'>Al-Majid — The Noble</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَاحِدُ</div>
+      <div class='english'>Al-Wahid — The One</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلصَّمَدُ</div>
+      <div class='english'>As-Samad — The Eternal Refuge</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْقَادِرُ</div>
+      <div class='english'>Al-Qadir — The Able</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُقْتَدِرُ</div>
+      <div class='english'>Al-Muqtadir — The Powerful</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُقَدِّمُ</div>
+      <div class='english'>Al-Muqaddim — The Promoter</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُؤَخِّرُ</div>
+      <div class='english'>Al-Mu'akhkhir — The Delayer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلأَوَّلُ</div>
+      <div class='english'>Al-Awwal — The First</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلآخِرُ</div>
+      <div class='english'>Al-Akhir — The Last</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلظَّاهِرُ</div>
+      <div class='english'>Az-Zahir — The Manifest</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَاطِنُ</div>
+      <div class='english'>Al-Batin — The Hidden</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَالِي</div>
+      <div class='english'>Al-Wali — The Governor</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُتَعَالِي</div>
+      <div class='english'>Al-Muta'ali — The Most High</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَرُّ</div>
+      <div class='english'>Al-Barr — The Source of Goodness</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلتَّوَّابُ</div>
+      <div class='english'>At-Tawwab — The Accepter of Repentance</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُنْتَقِمُ</div>
+      <div class='english'>Al-Muntaqim — The Avenger</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْعَفُوُّ</div>
+      <div class='english'>Al-Afuww — The Pardoner</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّؤُوفُ</div>
+      <div class='english'>Ar-Ra'uf — The Compassionate</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>مَالِكُ الْمُلْكِ</div>
+      <div class='english'>Malik-ul-Mulk — Owner of Dominion</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ذُو الْجَلَالِ وَالْإِكْرَامِ</div>
+      <div class='english'>Dhul-Jalali wal-Ikram — Lord of Majesty and Bounty</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُقْسِطُ</div>
+      <div class='english'>Al-Muqsit — The Just</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْجَامِعُ</div>
+      <div class='english'>Al-Jami' — The Gatherer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْغَنِيُّ</div>
+      <div class='english'>Al-Ghani — The Rich</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمُغْنِيُّ</div>
+      <div class='english'>Al-Mughni — The Enricher</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْمَانِعُ</div>
+      <div class='english'>Al-Mani' — The Preventer</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلضَّارُّ</div>
+      <div class='english'>Ad-Darr — The Distresser</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلنَّافِعُ</div>
+      <div class='english'>An-Nafi' — The Benefactor</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلنُّورُ</div>
+      <div class='english'>An-Nur — The Light</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْهَادِي</div>
+      <div class='english'>Al-Hadi — The Guide</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَدِيعُ</div>
+      <div class='english'>Al-Badi' — The Incomparable</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْبَاقِي</div>
+      <div class='english'>Al-Baqi — The Everlasting</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلْوَارِثُ</div>
+      <div class='english'>Al-Warith — The Inheritor</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلرَّشِيدُ</div>
+      <div class='english'>Ar-Rashid — The Righteous Teacher</div>
+    </div>
+    <div class='badge-card'>
+      <div class='arabic'>ٱلصَّبُورُ</div>
+      <div class='english'>As-Sabur — The Patient</div>
+    </div>
+
+  </div>
+    <footer style="background-color:#0d0d0d; color:#fff; font-family:'Segoe UI',Arial,sans-serif; padding:60px 20px 20px; border-top:3px solid #0d6efd; box-shadow:0 -3px 15px rgba(0,0,0,0.3);">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="row" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+
+      <!-- Logo & About -->
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h2 style="font-weight:700; color:#0d6efd;">Hw Quran Academy</h2>
+        <p style="color:#aaa; line-height:1.8; margin-top:15px;">
+          A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with 
+          qualified teachers. Empowering students with understanding of the Holy Quran.
+        </p>
+        <p style="margin-top:10px;">📍 Online Global Platform</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div style="flex:1 1 180px; min-width:160px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <!-- <li><a href="../main pages/html/index.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">🏠 Home</a></li> -->
+          <li><a href="../stories/main.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📖 Prophet Stories</a></li>
+          <li><a href="../grammer/grammer.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📚 Arabic Grammar</a></li>
+          <li><a href="../grammer/tarjuma.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📜 Quran Translation</a></li>
+          <li><a href="contact.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📞 Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div style="flex:1 1 200px; min-width:180px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Contact</h4>
+        <p style="margin:8px 0;">✉️ info@hwquranacademy.com</p>
+        <p style="margin:8px 0;">🌐 https://hwquranacademy.netlify.app/</p>
+      </div>
+
+      
+    <!-- Divider -->
+    <hr style="border-color:rgba(255,255,255,0.1); margin:30px 0;">
+
+    <!-- Bottom Footer -->
+    <div style="text-align:center; color:#777; font-size:14px;">
+      © 2025 <strong>Hw Quran Academy</strong> — All Rights Reserved | Designed with ❤️ for Islamic Education
+    </div>
+  </div>
+</footer>
+</body>
+<!-- Bootstrap JS -->
+ <script src="../auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</html>

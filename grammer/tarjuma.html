@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Translation</title>
+      <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/auth.js"></script>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Noto+Sans+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 🌐 Navbar + Dropdown Styling */
+
+@-webkit-keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}@keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}
+body{-webkit-animation:slide-in-fwd-top .4s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-fwd-top .4s cubic-bezier(.25,.46,.45,.94) }
+
+/* Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background: #24292e;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.dropbtn:hover {
+  background: #2f363d;
+}
+
+/* Dropdown Menu Box */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Dropdown Links */
+.dropdown-content a {
+  color: #24292e;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Optional Hover Effect */
+.dropdown-content a:hover {
+  background: #f6f8fa;
+  padding-left: 22px;
+}
+
+/* Small Icons beside text */
+.dropdown-content a .icon {
+  font-size: 16px;
+}
+
+/* Divider inside dropdown */
+.dropdown-content hr {
+  border-top: 1px solid #e1e4e8;
+}
+.dropdown{
+  z-index: 
+  10000000000000000000;
+}
+/* Dropdown hover animation */
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  animation: 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both running slide-in-top;
+  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(0);
+  z-index: 100;
+}
+
+/* Optional animation keyframes (if you want smooth slide) */
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+        body {
+            font-family: 'Noto Sans Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .arabic-text {
+            font-family: 'Noto Sans Arabic', Tahoma, sans-serif;
+            font-size: 1.8em;
+            line-height: 2.8;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+            background-color: #eef2ff;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .translation-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #343a40;
+            padding: 15px;
+            border-left: 3px solid #6f42c1;
+            margin-bottom: 20px;
+        }
+        .surah-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        .surah-list {
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+        .surah-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .surah-item:hover {
+            background-color: #f8f9fa;
+        }
+        .surah-item.active {
+            background-color: #6f42c1;
+            color: white;
+            font-weight: bold;
+        }
+        .surah-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6f42c1;
+        }
+        .verse-container {
+            margin-bottom: 25px;
+        }
+        .verse-number {
+            font-weight: bold;
+            color: #6f42c1;
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selection Modal -->
+    <div  class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="languageModalLabel">Select Translation Language</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Please choose the language for the Quran translation (Tarjuma):</p>
+                    <select id="languageSelect" class="form-select">
+                        <option value="en">English</option>
+                        <option value="ur">Urdu</option>
+                        <option value="hi">Hindi</option>
+                        <option value="bn">Bengali</option>
+                        <option value="tr">Turkish</option>
+                        <option value="fa">Persian</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="id">Indonesian</option>
+                        <option value="ms">Malay</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="loadAppBtn" class="btn btn-primary">Load Quran</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+             <!-- navbar -->
+<nav class="navbar navbar-expand-lg bg-primary px-5">
+  <div class="container-fluid">
+    <img src="../images/logo.png" hight="50px" width="50px" style="border-radius: 50%; margin-right: 10px;" alt="">
+    <a class="navbar-brand" href="#" style="font-weight: bold ;">Hwquranacademy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../main pages/html/index.html">Home</a>
+      </li>
+      <li style="list-style: none; margin-bottom: 10px; margin-right: 10px;" class="nav-item">
+        <a class="mt-2 nav-link text-white" href="../duas/dua.html">🤲Dua (Prayer)</a>
+      </li>
+      <ul class="navbar-nav">
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Grammer & Translation</button>
+
+          <div class="dropdown-content">
+            <a href="grammer.html
+              ">Arabic Grammer</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Pages</button>
+          <div class="dropdown-content">
+            <a href="../main pages/html/contact.html">Contact</a>
+            <a href="../main pages/html/about.html"> About</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Learning</button>
+          <div class="dropdown-content">
+            <a href="../login/html/t.html" class="mt-2 mx-2"><i class="icon">👨‍🏫</i> Teacher</a>
+            <a href="../login/html/s.html" class="mt-2 mx-2"><i class="icon">👤</i> Student</a>
+            <a href="../stories/main.html" class="mt-2 mx-2"><i class="icon">📚</i> Prophet Stories</a>
+          </div>
+        </div>
+        <div class="dropdown mx-2">
+          <button class="dropbtn my-2">Allah & Prophet SAW names</button>
+
+          <div class="dropdown-content">
+            <a href="../allah and saw name/allah name.html
+              ">Allah names</a>
+            <a href="../allah and saw name/saw.html">Prophet SAW names</a>
+          </div>
+        </div>
+        <li class="nav-item" id="login">
+          <a class="mt-2 nav-link text-white" href="../mlogin.html" ><i class="icon">🔑</i> Login</a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="mainApp" class="container mt-4" style="display: none;">
+        <header class="text-center mb-4">
+            <h1 class="text-primary">Quran with Translation</h1>
+            <p class="lead">Read and Reflect</p>
+            <a href="tquiz.html"><button class="bg-success" style="border: none; border-radius: 10px; padding: 10px;">TAKE QUIZ</button></a>
+        </header>
+        
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <h4>Find Surah</h4>
+                <select id="findSurahDropdown" class="form-select mb-3">
+                    <option value="">-- Select Surah --</option>
+                </select>
+                <h4>Surah List</h4>
+                <div class="surah-list">
+                    <div class="list-group" id="surahList"></div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div id="surahContent" class="surah-content">
+                    <div class="loading-spinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <footer style="margin-top: 200px; background-color:#0d0d0d; color:#fff; font-family:'Segoe UI',Arial,sans-serif; padding:60px 20px 20px; border-top:3px solid #0d6efd; box-shadow:0 -3px 15px rgba(0,0,0,0.3);">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="row" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+
+      <!-- Logo & About -->
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h2 style="font-weight:700; color:#0d6efd;">Hw Quran Academy</h2>
+        <p style="color:#aaa; line-height:1.8; margin-top:15px;">
+          A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with 
+          qualified teachers. Empowering students with understanding of the Holy Quran.
+        </p>
+        <p style="margin-top:10px;">📍 Online Global Platform</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div style="flex:1 1 180px; min-width:160px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="../main pages/html/index.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">🏠 Home</a></li>
+          <li><a href="../stories/main.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📖 Prophet Stories</a></li>
+          <li><a href="grammer.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📚 Arabic Grammar</a></li>
+          <!-- <li><a href="tarjuma.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📜 Quran Translation</a></li> -->
+          <li><a href="../main pages/html/contact.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0; transition:color 0.3s;">📞 Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div style="flex:1 1 200px; min-width:180px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Contact</h4>
+        <p style="margin:8px 0;">✉️ info@hwquranacademy.com</p>
+        <p style="margin:8px 0;">🌐 https://hwquranacademy.netlify.app/</p>
+      </div>
+
+      
+    <!-- Divider -->
+    <hr style="border-color:rgba(255,255,255,0.1); margin:30px 0;">
+
+    <!-- Bottom Footer -->
+    <div style="text-align:center; color:#777; font-size:14px;">
+      © 2025 <strong>Hw Quran Academy</strong> — All Rights Reserved | Designed with ❤️ for Islamic Education
+    </div>
+  </div>
+</footer>
+<!-- font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const languageModal = new bootstrap.Modal(document.getElementById('languageModal'));
+    const mainApp = document.getElementById('mainApp');
+    const loadAppBtn = document.getElementById('loadAppBtn');
+    const languageSelect = document.getElementById('languageSelect');
+    const surahList = document.getElementById('surahList');
+    const surahContent = document.getElementById('surahContent');
+    const findSurahDropdown = document.getElementById('findSurahDropdown');
+
+    let selectedLanguage = '';
+    let allSurahs = [];
+
+    const API_BASE = 'https://api.alquran.cloud/v1/';
+    const languageEditionMap = {
+        'en': 'en.sahih',
+        'ur': 'ur.junagarhi',
+        'hi': 'hi.hindi',
+        'bn': 'bn.bengali',
+        'tr': 'tr.sadi',
+        'fa': 'fa.ayati',
+        'es': 'es.cortes',
+        'fr': 'fr.hamidullah',
+        'id': 'id.indonesian',
+        'ms': 'ms.basmeih'
+    };
+
+    languageModal.show();
+
+    loadAppBtn.addEventListener('click', () => {
+        selectedLanguage = languageSelect.value;
+        if (!selectedLanguage) {
+            alert('Please select a language.');
+            return;
+        }
+        languageModal.hide();
+        mainApp.style.display = 'block';
+        initializeApp();
+    });
+
+    async function initializeApp() {
+        try {
+            const response = await fetch(`${API_BASE}surah`);
+            const data = await response.json();
+            allSurahs = data.data;
+            populateSurahDropdown();
+            populateSurahList();
+            await loadSurah(1);
+        } catch (error) {
+            surahContent.innerHTML = `<p class="text-danger">Failed to load Surah list.</p>`;
+        }
+    }
+
+    function populateSurahDropdown() {
+        findSurahDropdown.innerHTML = '<option value="">-- Select Surah --</option>' +
+            allSurahs.map(surah => `<option value="${surah.number}">${surah.number}. ${surah.englishName}</option>`).join('');
+    }
+
+    function populateSurahList() {
+        surahList.innerHTML = '';
+        allSurahs.forEach(surah => {
+            const surahItem = document.createElement('div');
+            surahItem.className = 'surah-item';
+            surahItem.textContent = `${surah.number}. ${surah.englishName}`;
+            surahItem.dataset.surahNumber = surah.number;
+            surahItem.addEventListener('click', () => loadSurah(surah.number));
+            surahList.appendChild(surahItem);
+        });
+    }
+
+    findSurahDropdown.addEventListener('change', (e) => {
+        if (e.target.value) {
+            loadSurah(parseInt(e.target.value));
+        }
+    });
+
+    async function loadSurah(surahNumber) {
+        document.querySelectorAll('.surah-item').forEach(item => item.classList.remove('active'));
+        document.querySelector(`[data-surah-number="${surahNumber}"]`).classList.add('active');
+        findSurahDropdown.value = surahNumber;
+
+        surahContent.innerHTML = `<div class="loading-spinner"><div class="spinner-border text-primary" role="status"></div></div>`;
+
+        try {
+            const arabicRes = await fetch(`${API_BASE}surah/${surahNumber}/quran-simple`);
+            const translationRes = await fetch(`${API_BASE}surah/${surahNumber}/${languageEditionMap[selectedLanguage]}`);
+            const arabicData = await arabicRes.json();
+            const translationData = await translationRes.json();
+            displaySurah(arabicData.data, translationData.data);
+        } catch (error) {
+            surahContent.innerHTML = `<p class="text-danger">Failed to load Surah details. Please try again.</p>`;
+        }
+    }
+
+    function displaySurah(arabicSurah, translationSurah) {
+        const detailsHtml = `
+            <div class="surah-details">
+                <h2>${translationSurah.englishName} (${translationSurah.name})</h2>
+                <p><strong>Meaning:</strong> ${translationSurah.englishNameTranslation}</p>
+                <p><strong>Revelation Place:</strong> ${translationSurah.revelationType} | 
+                   <strong>Number of Verses:</strong> ${translationSurah.numberOfAyahs}</p>
+            </div>
+        `;
+
+        const versesHtml = arabicSurah.ayahs
+            .filter((ayah, index) => !(index === 0 && ayah.text.startsWith('بِسْمِ')))
+            .map((ayah, index) => `
+                <div class="verse-container">
+                    <div class="arabic-text">${ayah.text}</div>
+                    <div class="translation-text">
+                        <span class="verse-number">${ayah.numberInSurah}</span>
+                        ${translationSurah.ayahs[index + (ayah.text.startsWith('بِسْمِ') ? 1 : 0)].text}
+                    </div>
+                </div>
+            `).join('');
+
+        surahContent.innerHTML = detailsHtml + versesHtml;
+    }
+});
+</script>
+<script src="../auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: The Story of Prophet Adam (عليه السلام)</title>
+    <meta name="description" content="Test your knowledge about the story of Prophet Adam with our comprehensive 30-question quiz.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #24292e;
+            --accent-color: #2f363d;
+            --light-color: #f8f9fa;
+            --dark-color: #0d0d0d;
+            --golden-color: #d4af37;
+            --success-color: #198754;
+            --danger-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Exact Same Navbar Styles */
+        nav {
+            background: var(--secondary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Exact Same Dropdown Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .dropbtn {
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 10px 18px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        .dropbtn:hover {
+            background: var(--accent-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 220px;
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: var(--secondary-color);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f5f9;
+            padding-left: 20px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Quiz Container */
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .quiz-title {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress {
+            height: 25px;
+            border-radius: 15px;
+            background-color: #e9ecef;
+        }
+
+        .progress-bar {
+            background-color: var(--primary-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-container {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .options-container {
+            margin: 15px 0;
+        }
+
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+        .option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success-color);
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--danger-color);
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-quiz {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #0b5ed7;
+        }
+
+        .btn-secondary-custom {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #1a1e22;
+        }
+
+        /* Results Section */
+        .results-container {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .result-details {
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .result-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .correct-icon {
+            color: var(--success-color);
+        }
+
+        .incorrect-icon {
+            color: var(--danger-color);
+        }
+
+        /* Explanation Section */
+        .explanation {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Exact Same Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 60px 20px 20px;
+            border-top: 3px solid var(--primary-color);
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-section {
+            flex: 1 1 250px;
+            min-width: 220px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .quiz-container {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+
+            .footer-section {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Exact Same Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="https://i.ibb.co/6PMLCqF/logo.png" alt="HW Quran Academy" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <div class="dropdown mx-2">
+                        <button class="dropbtn my-2">Pages</button>
+                        <div class="dropdown-content">
+                            <a href="../../main pages/html/contact.html">Contact</a>
+                            <a href="../../main pages/html/about.html">About</a>
+                        </div>
+                    </div>
+                    <div class="dropdown mx-2">
+                        <button class="dropbtn my-2">Learning</button>
+                        <div class="dropdown-content">
+                            <a href="../../login/html/t.html" class="mt-2 mx-2"><i class="icon">👨‍🏫</i> Teacher</a>
+                            <a href="../../login/html/s.html" class="mt-2 mx-2"><i class="icon">👤</i> Student</a>
+                            <a href="../../stories/main.html" class="mt-2 mx-2"><i class="icon">📚</i> Prophet Stories</a>
+                        </div>
+                    </div>
+                    <li class="nav-item list-unstyled mx-2">
+                        <a class="nav-link text-white" href="../../mlogin.html">🔑 Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1 class="quiz-title">Quiz: The Story of Prophet Adam (عليه السلام)</h1>
+            <p>Test your knowledge about the timeless story of the first human and prophet</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%">
+                    0/30
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div id="quizQuestions">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <!-- Quiz Controls -->
+        <div class="quiz-controls">
+            <button id="prevBtn" class="btn-quiz btn-secondary-custom" disabled>Previous</button>
+            <button id="nextBtn" class="btn-quiz btn-primary-custom">Next</button>
+            <button id="submitBtn" class="btn-quiz btn-primary-custom" style="display: none;">Submit Quiz</button>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsContainer" class="results-container">
+            <h2>Your Quiz Results</h2>
+            <div class="score-display" id="scoreDisplay">0/30</div>
+            <div class="result-message" id="resultMessage"></div>
+            <div class="result-details" id="resultDetails"></div>
+            <button id="retakeBtn" class="btn-quiz btn-primary-custom">Retake Quiz</button>
+            <button id="backBtn" class="btn-quiz btn-secondary-custom">Back to Story</button>
+        </div>
+    </div>
+
+    <!-- Exact Same Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <!-- Logo & About -->
+                <div class="footer-section">
+                    <h2>Hw Quran Academy</h2>
+                    <p>
+                        A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with 
+                        qualified teachers. Empowering students with understanding of the Holy Quran.
+                    </p>
+                    <p>📍 Online Global Platform</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../../stories/main.html">📖 Prophet Stories</a></li>
+                        <li><a href="../../grammer/grammer.html">📚 Arabic Grammar</a></li>
+                        <li><a href="../../grammer/tarjuma.html">📜 Quran Translation</a></li>
+                        <li><a href="contact.html">📞 Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>✉️ info@hwquranacademy.com</p>
+                    <p>🌐 https://hwquranacademy.netlify.app/</p>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <hr class="footer-divider">
+
+            <!-- Bottom Footer -->
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; 2023 HW Quran Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Quiz Data
+        const quizData = [
+            {
+                question: "What is the meaning of 'Abu al-Bashar' as mentioned in the story?",
+                options: ["Father of Prophets", "Father of Humanity", "Father of Angels", "Father of Earth"],
+                answer: 1,
+                explanation: "Adam (عليه السلام) is called 'Abu al-Bashar' which means the father of all human beings."
+            },
+            {
+                question: "Which Quranic Surah contains the verse: 'Behold! Your Lord said to the angels: I am about to place a vicegerent on earth…'?",
+                options: ["Surah Al-A'raf", "Surah Al-Baqarah", "Surah Taha", "Surah An-Nisa"],
+                answer: 1,
+                explanation: "This verse is found in Surah Al-Baqarah (2:30), where Allah announces His intention to create Adam as His vicegerent on earth."
+            },
+            {
+                question: "According to Islamic tradition, what elements were used to create Adam?",
+                options: ["Light and water", "Clay, dust, earth, and water", "Fire and smoke", "Wind and clouds"],
+                answer: 1,
+                explanation: "Islamic tradition describes Allah commanding the angels to gather dust from all corners of the earth—red, white, black, and yellow—which was then mixed with water to form Adam."
+            },
+            {
+                question: "What was the first thing Prophet Adam said after being given life?",
+                options: ["There is no god but Allah", "Allahu Akbar", "Alhamdulillah (Praise be to Allah)", "Subhanallah"],
+                answer: 2,
+                explanation: "According to tradition, after being given life, Adam sneezed and uttered 'Alhamdulillah' (Praise be to Allah), establishing the first instance of human gratitude."
+            },
+            {
+                question: "What special knowledge did Allah impart to Adam that distinguished him from the angels?",
+                options: ["The knowledge of the future", "The knowledge of all languages", "The names of all things", "The knowledge of the heavens and earth"],
+                answer: 2,
+                explanation: "Allah imparted to Adam 'the names of all things' (Quran 2:31), encompassing language, knowledge, categorization, and insight, which set him apart from the angels."
+            },
+            {
+                question: "How tall was Prophet Adam according to prophetic hadith?",
+                options: ["30 cubits (approximately 15 meters)", "60 cubits (approximately 30 meters)", "90 cubits (approximately 45 meters)", "120 cubits (approximately 60 meters)"],
+                answer: 1,
+                explanation: "Prophetic hadith describe Adam as being 60 cubits tall (approximately 30 meters), a stature symbolic of the dignity and potential granted to the first human."
+            },
+            {
+                question: "What is the meaning of 'Jannah' where Adam and Hawwa first resided?",
+                options: ["Earth", "Heaven", "Paradise", "Garden of Eden"],
+                answer: 2,
+                explanation: "Jannah means Paradise in Arabic, the place where Adam and Hawwa first resided before their descent to earth."
+            },
+            {
+                question: "According to Islamic tradition, how was Hawwa (Eve) created?",
+                options: ["From the same clay as Adam", "From Adam's rib while he slept", "From the dust of paradise", "From a divine light"],
+                answer: 1,
+                explanation: "Islamic narrations state that Hawwa was created from Adam's rib while he slept, symbolizing their organic unity, mutual protection, and complementarity."
+            },
+            {
+                question: "What was the single prohibition given to Adam and Hawwa in Paradise?",
+                options: ["Not to speak to the animals", "Not to leave Paradise", "Not to approach a specific tree", "Not to eat meat"],
+                answer: 2,
+                explanation: "Adam and Hawwa were told not to approach a specific tree (the 'Tree of Immortality' or 'Tree of Eternity'), which was the single prohibition in Paradise."
+            },
+            {
+                question: "Who was Iblis before his rebellion?",
+                options: ["A jinn", "An angel", "A human", "A deity"],
+                answer: 0,
+                explanation: "Iblis was created from smokeless fire and was among the ranks of angels due to his devout worship, making him a jinn who had achieved a high status among the angels."
+            },
+            {
+                question: "Why did Iblis refuse to prostrate before Adam?",
+                options: ["He was jealous of Adam's knowledge", "He believed he was better than Adam", "He feared Allah would favor humans", "He misunderstood Allah's command"],
+                answer: 1,
+                explanation: "Iblis refused to prostrate before Adam, saying 'I am better than him: You created me from fire and him from clay,' displaying arrogance (kibr) and racism."
+            },
+            {
+                question: "What did Iblis ask for after being expelled from Heaven?",
+                options: ["Forgiveness", "Respite until the Day of Judgment", "Another chance", "Power over humans"],
+                answer: 1,
+                explanation: "After being expelled and cursed, Iblis asked for respite—to live until the Day when all are resurrected—which Allah granted in His wisdom."
+            },
+            {
+                question: "How did Iblis tempt Adam and Hawwa to eat from the forbidden tree?",
+                options: ["By threatening them", "By promising immortality and eternal kingdom", "By creating doubt in Allah's mercy", "By offering wealth and power"],
+                answer: 1,
+                explanation: "Iblis whispered to them, promising immortality and a kingdom that never decays, framing disobedience as a path toward spiritual elevation."
+            },
+            {
+                question: "What was the immediate effect of eating from the forbidden tree?",
+                options: ["They became ill", "Their nakedness became apparent", "They were immediately expelled", "They lost the ability to speak"],
+                answer: 1,
+                explanation: "After eating from the forbidden tree, their nakedness became apparent, which was a physical manifestation of their loss of innocence, and they tried to cover themselves with leaves from the garden."
+            },
+            {
+                question: "What was the repentance prayer that Adam and Hawwa uttered?",
+                options: ["'There is no god but You'", "'Our Lord, we have wronged ourselves, and if You did not forgive us and have mercy upon us, we will surely be among the losers'", "'We seek Your forgiveness'", "'We have sinned against ourselves'"],
+                answer: 1,
+                explanation: "Adam and Hawwa uttered: 'Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers' (Quran 7:23), which became the primordial formula for repentance."
+            },
+            {
+                question: "How does Islam view Adam's error in Paradise?",
+                options: ["A sin of defiance", "A mistake born of weakness and forgetfulness", "An unforgivable transgression", "A betrayal of trust"],
+                answer: 1,
+                explanation: "Islam views Adam's error not as a sin of defiance, but as a mistake born of weakness and forgetfulness—a distinction repeatedly emphasized in Islamic tradition."
+            },
+            {
+                question: "Where did Adam and Hawwa reunite after being expelled from Paradise?",
+                options: ["Jerusalem", "Mecca", "The plain of Arafat", "Mount Sinai"],
+                answer: 2,
+                explanation: "According to many Islamic narrations, Adam and Hawwa were cast to different locations on earth but reunited at the plain of Arafat, near present-day Makkah, after a period of searching and longing."
+            },
+            {
+                question: "What term describes the role of humanity as custodians of the earth according to Islamic theology?",
+                options: ["Imam", "Khalifah (Vicegerent)", "Hafiz", "Amin"],
+                answer: 1,
+                explanation: "Islamic theology views humanity as 'khalifah'—custodians of the earth—fulfilling a unique destiny that requires both trial and striving."
+            },
+            {
+                question: "Who were Adam's sons mentioned in the story who committed the first murder?",
+                options: ["Isaac and Ishmael", "Musa and Harun", "Qabil (Cain) and Habil (Abel)", "Yusuf and Yaqub"],
+                answer: 2,
+                explanation: "Qabil (Cain) murdered his brother Habil (Abel) out of jealousy when Habil's offering was accepted by Allah while Qabil's was not, committing humanity's first act of violence."
+            },
+            {
+                question: "How did Allah teach Qabil to bury his brother's body?",
+                options: ["Through revelation", "Through an angel", "By sending a crow to show him", "Through a dream"],
+                answer: 2,
+                explanation: "Confused and ashamed, Qabil did not know what to do with Habil's body until Allah sent a crow to show him how to bury his brother—a lesson in humility and the proper rites of mourning."
+            },
+            {
+                question: "Who did Adam appoint as his vicegerent before his death?",
+                options: ["Qabil", "Habil", "Seth (Shith)", "Idris"],
+                answer: 2,
+                explanation: "When Adam grew old, he appointed his son Seth (Shith) as his vicegerent—a transfer of prophetic legacy that assured the continuity of guidance."
+            },
+            {
+                question: "How long did Prophet Adam live according to Islamic traditions?",
+                options: ["500 years", "700 years", "1000 years", "1200 years"],
+                answer: 2,
+                explanation: "Islamic traditions state that Adam lived for nearly a thousand years, guiding his offspring throughout his long life."
+            },
+            {
+                question: "What Islamic term refers to the natural state of being born sinless?",
+                options: ["Iman", "Taqwa", "Fitrah", "Ihsan"],
+                answer: 2,
+                explanation: "In Islam, every child is born in a state of 'fitrah'—sinless with full personal accountability for their actions—rejecting the concept of inherited sin."
+            },
+            {
+                question: "How does Islam's view of Adam's sin differ from the Christian concept of 'Original Sin'?",
+                options: ["Islam sees it as more severe", "Islam does not believe it was inherited by descendants", "Islam does not believe it was forgiven", "Islam believes it required divine redemption through a prophet"],
+                answer: 1,
+                explanation: "Islam sharply distinguishes Adam's error from the Christian doctrine of 'Original Sin.' In Islam, Adam's sin was not inherited by his descendants: every child is born sinless (fitrah)."
+            },
+            {
+                question: "What did Adam's creation from dust of various colors symbolize?",
+                options: ["The different ranks among humans", "The diversity of Adam's progeny", "The superiority of certain races", "The fallibility of humans"],
+                answer: 1,
+                explanation: "Allah commanded the angels to gather dust from all corners of the earth—red, white, black, and yellow—symbolizing the diversity of Adam's progeny and the intended variety within the Divine plan."
+            },
+            {
+                question: "What term describes the arrogance that led to Iblis's downfall?",
+                options: ["Shirk", "Kibr (Arrogance)", "Kufr", "Fisq"],
+                answer: 1,
+                explanation: "Iblis's act is identified as the origin of 'kibr' (arrogance)—the first sin among Allah's creatures—the belief that one's nature, essence, or station makes them superior to others."
+            },
+            {
+                question: "What does the story of Adam teach about gratitude?",
+                options: ["Gratitude is optional", "Gratitude preserves divine favor", "Only prophets need to be grateful", "Gratitude is only for blessings in Paradise"],
+                answer: 1,
+                explanation: "The story teaches that the blessings of Paradise were lost due to heedlessness and ingratitude. Gratitude—by word and deed—is perpetually emphasized as a means to preserve Divine favor and ward off Satanic plots."
+            },
+            {
+                question: "What is the meaning of 'Amanah' as mentioned in the lessons from Adam's story?",
+                options: ["Prayer", "Trust (Divine responsibility)", "Charity", "Fasting"],
+                answer: 1,
+                explanation: "Humanity's descent to earth is viewed as receiving an 'amanah'—a divine trust—to populate, improve, and care for the world. Muslims are enjoined to view themselves as Allah's vicegerents, tasked with justice, mercy, and ethical innovation."
+            },
+            {
+                question: "According to the story, what quality makes humans honored in the sight of Allah?",
+                options: ["Wealth and power", "Lineage and ancestry", "Righteousness and piety", "Knowledge and wisdom"],
+                answer: 2,
+                explanation: "Islam advocates the principle that 'the most honored in the sight of Allah is the most righteous,' not the wealthiest or most powerful, emphasizing unity despite diversity."
+            },
+            {
+                question: "What is the ultimate lesson from the story of Adam's fall and redemption?",
+                options: ["Humans are inherently sinful", "Obedience to Allah is optional", "Sincere repentance leads to forgiveness", "Earth is a punishment for humanity"],
+                answer: 2,
+                explanation: "The teaching of Adam's story is not to lament a lost paradise, but to walk the path of humility, knowledge, and hope—confident that, as Adam was forgiven, so too may we be if we turn sincerely to our Creator."
+            }
+        ];
+
+        // Quiz Variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        let quizSubmitted = false;
+
+        // DOM Elements
+        const quizQuestions = document.getElementById('quizQuestions');
+        const progressBar = document.getElementById('progressBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const resultMessage = document.getElementById('resultMessage');
+        const resultDetails = document.getElementById('resultDetails');
+        const retakeBtn = document.getElementById('retakeBtn');
+        const backBtn = document.getElementById('backBtn');
+
+        // Initialize Quiz
+        function initQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            quizSubmitted = false;
+            resultsContainer.style.display = 'none';
+            quizQuestions.style.display = 'block';
+            prevBtn.disabled = true;
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+            
+            displayQuestion();
+            updateProgressBar();
+        }
+
+        // Display Current Question
+        function displayQuestion() {
+            const question = quizData[currentQuestion];
+            
+            const questionHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizData.length}</div>
+                    <h3>${question.question}</h3>
+                    <div class="options-container">
+                        ${question.options.map((option, index) => `
+                            <div class="option" data-index="${index}" onclick="selectOption(${index})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${quizSubmitted ? `
+                        <div class="explanation">
+                            <strong>Explanation:</strong> ${question.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            quizQuestions.innerHTML = questionHTML;
+            
+            // If user has already answered this question, mark the selected option
+            if (userAnswers[currentQuestion] !== undefined) {
+                const selectedOption = document.querySelector(`.option[data-index="${userAnswers[currentQuestion]}"]`);
+                if (selectedOption) {
+                    selectedOption.classList.add('selected');
+                }
+            }
+            
+            // If quiz is submitted, show correct/incorrect answers
+            if (quizSubmitted) {
+                const correctOption = document.querySelector(`.option[data-index="${question.answer}"]`);
+                if (correctOption) {
+                    correctOption.classList.add('correct');
+                }
+                
+                if (userAnswers[currentQuestion] !== undefined && userAnswers[currentQuestion] !== question.answer) {
+                    const incorrectOption = document.querySelector(`.option[data-index="${userAnswers[currentQuestion]}"]`);
+                    if (incorrectOption) {
+                        incorrectOption.classList.add('incorrect');
+                    }
+                }
+            }
+        }
+
+        // Select Option
+        function selectOption(index) {
+            if (quizSubmitted) return;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to the clicked option
+            document.querySelector(`.option[data-index="${index}"]`).classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = index;
+        }
+
+        // Navigate to Next Question
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === undefined) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+            
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgressBar();
+                
+                // Enable Previous button after moving to the next question
+                prevBtn.disabled = false;
+                
+                // Show Submit button on the last question
+                if (currentQuestion === quizData.length - 1) {
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'block';
+                }
+            }
+        }
+
+        // Navigate to Previous Question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgressBar();
+                
+                // Disable Previous button on the first question
+                if (currentQuestion === 0) {
+                    prevBtn.disabled = true;
+                }
+                
+                // Show Next button if not on the last question
+                if (currentQuestion < quizData.length - 1) {
+                    nextBtn.style.display = 'block';
+                    submitBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // Submit Quiz
+        function submitQuiz() {
+            if (userAnswers[currentQuestion] === undefined) {
+                alert('Please select an answer before submitting.');
+                return;
+            }
+            
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < quizData.length; i++) {
+                if (userAnswers[i] === quizData[i].answer) {
+                    score++;
+                }
+            }
+            
+            // Mark quiz as submitted
+            quizSubmitted = true;
+            
+            // Show results
+            showResults();
+            
+            // Display all questions with correct answers
+            currentQuestion = 0;
+            displayQuestion();
+        }
+
+        // Show Results
+        function showResults() {
+            quizQuestions.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            // Display score
+            scoreDisplay.textContent = `${score}/${quizData.length}`;
+            
+            // Display result message based on score
+            let message = '';
+            if (score >= 27) {
+                message = 'Excellent! You have a deep understanding of the story of Prophet Adam (عليه السلام).';
+            } else if (score >= 21) {
+                message = 'Good job! You have a solid knowledge of the story of Prophet Adam (عليه السلام).';
+            } else if (score >= 15) {
+                message = 'Fair attempt. Consider revisiting the story of Prophet Adam (عليه السلام) to improve your knowledge.';
+            } else {
+                message = 'Keep learning! The story of Prophet Adam (عليه السلام) is rich with wisdom and lessons.';
+            }
+            resultMessage.textContent = message;
+            
+            // Generate detailed results
+            let detailsHTML = '<h5>Your Answers:</h5>';
+            for (let i = 0; i < quizData.length; i++) {
+                const isCorrect = userAnswers[i] === quizData[i].answer;
+                const iconClass = isCorrect ? 'correct-icon' : 'incorrect-icon';
+                const iconSymbol = isCorrect ? 'fa-check-circle' : 'fa-times-circle';
+                
+                detailsHTML += `
+                    <div class="result-item">
+                        <i class="fas ${iconSymbol} ${iconClass} result-icon"></i>
+                        <span>Question ${i + 1}: ${isCorrect ? 'Correct' : 'Incorrect'}</span>
+                    </div>
+                `;
+            }
+            resultDetails.innerHTML = detailsHTML;
+        }
+
+        // Update Progress Bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressBar.textContent = `${currentQuestion + 1}/${quizData.length}`;
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        prevBtn.addEventListener('click', prevQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        retakeBtn.addEventListener('click', initQuiz);
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'adam-story.html';
+        });
+
+        // Initialize the quiz when the page loads
+        initQuiz();
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Story of Prophet Musa (Moses)</title>
+
+  <!-- Bootstrap & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    /* 🌐 Navbar + Dropdown Styling */
+    .dropdown { position: relative; display: inline-block; font-family: 'Segoe UI', Arial, sans-serif; }
+    .dropbtn { background: #24292e; color: #fff; padding: 10px 18px; border: none; cursor: pointer; font-size: 15px; border-radius: 6px; transition: background 0.3s ease; font-weight: 500; }
+    .dropbtn:hover { background: #2f363d; }
+    .dropdown-content { display: none; position: absolute; min-width: 220px; background: #fff; border: 1px solid #e1e4e8; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; z-index: 100; overflow: hidden; }
+    .dropdown-content a { color: #24292e; padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; text-decoration: none; font-weight: 500; transition: background 0.2s ease, padding-left 0.2s ease; }
+    .dropdown-content a:hover { background: #f6f8fa; padding-left: 22px; }
+    .dropdown:hover .dropdown-content { display: block; opacity: 1; animation: slide-in-top 0.3s ease forwards; transform: translateY(0); z-index: 100; }
+    @keyframes slide-in-top { 0% { transform: translateY(-10px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .story-container {
+      max-width: 700px; /* 50% reduced width */
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .story-container h1 {
+      color: #0d6efd;
+      font-weight: 700;
+      border-bottom: 3px solid #0d6efd;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .story-container h2 {
+      color: #343a40;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .story-container p {
+      font-size: 1.05rem;
+    }
+    .story-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 25px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .quiz-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .quiz-link .btn {
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 🟦 Navbar -->
+<nav class="navbar navbar-expand-lg bg-primary px-5">
+  <div class="container-fluid">
+    <img src="../../images/logo.png" height="50px" width="50px" style="border-radius: 50%; margin-right: 10px;" alt="Logo">
+    <a class="navbar-brand text-white fw-bold" href="../../index.html">Hwquranacademy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <li class="nav-item list-unstyled mx-2"><a class="nav-link text-white" href="../../duas/dua.html">🤲 Dua</a></li>
+      <li class="nav-item list-unstyled mx-2"><a class="nav-link text-white" href="../../main pages/html/index.html">Home</a></li>
+      <div class="dropdown mx-2">
+        <button class="dropbtn my-2">Grammer & Tarjuma</button>
+        <div class="dropdown-content">
+          <a href="../../grammer/grammer.html">Arabic Grammer</a>
+          <a href="../../grammer/tarjuma.html">Quran Translation</a>
+        </div>
+      </div>
+      <div class="dropdown mx-2">
+        <button class="dropbtn my-2">Allah and Prophet SAW names</button>
+        <div class="dropdown-content">
+          <a href="../../allah and saw name/allah name.html">Allah names</a>
+          <a href="../../allah and saw name/saw.html">Prophet SAW names</a>
+        </div>
+      </div>
+      <div class="dropdown mx-2">
+        <button class="dropbtn my-2">Pages</button>
+        <div class="dropdown-content">
+          <a href="../../main pages/html/contact.html">Contact</a>
+          <a href="../../main pages/html/about.html">About</a>
+        </div>
+      </div>
+      <div class="dropdown mx-2">
+        <button class="dropbtn my-2">Learning</button>
+        <div class="dropdown-content">
+          <a href="../../login/html/t.html">👨‍🏫 Teacher</a>
+          <a href="../../login/html/s.html">👤 Student</a>
+          <a href="../../stories/main.html">📚 Prophet Stories</a>
+        </div>
+      </div>
+      <li class="nav-item list-unstyled mx-2"><a class="nav-link text-white" href="../../mlogin.html">🔑 Login</a></li>
+    </div>
+  </div>
+</nav>
+
+<!-- 📖 Story Section -->
+<div class="story-container">
+  <h1>The Story of Prophet Musa (Moses)</h1>
+  <p>The story of Prophet Musa (Moses) is the most frequently told story in the Quran. It's a powerful epic of liberation, faith, and confrontation with tyranny. He is known as Kalamullah—the one to whom Allah spoke directly...</p>
+
+  <h2>A Miraculous Beginning in the Nile</h2>
+  <p>Musa was born in Egypt at a time of great terror for his people, the Children of Israel...</p>
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200" loading="lazy" alt="Basket in river">
+
+  <h2>A Prince Finds His True Calling</h2>
+  <p>Musa grew up in the palace as a prince. However, his heart was never at ease with the injustice he saw around him...</p>
+  <img src="https://images.unsplash.com/photo-1523906630133-f6934a1ab2b9?q=80&w=1200" loading="lazy" alt="Ancient Egypt">
+
+  <h2>The Calling at the Burning Bush</h2>
+  <p>After completing his service in Midian, Musa returned to Egypt. On his way, he saw a burning bush...</p>
+  <img src="https://images.unsplash.com/photo-1511207538754-3b1a79e3d57c?q=80&w=1200" loading="lazy" alt="Burning Bush">
+
+  <h2>The Exodus and the Parting of the Sea</h2>
+  <p>Allah commanded Musa to lead the Children of Israel out of Egypt by night...</p>
+  <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1200" loading="lazy" alt="Sea Parting">
+
+  <h2>The Golden Calf and the Covenant</h2>
+  <p>While Musa was on Mount Sinai receiving the Torah, his people grew impatient and created a golden calf...</p>
+  <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?q=80&w=1200" loading="lazy" alt="Golden Calf">
+
+  <div class="quiz-link">
+    <a href="../Quizes/musa.html" class="btn btn-primary btn-lg">Take the Quiz on Prophet Musa</a>
+  </div>
+</div>
+
+<!-- 🦶 Footer -->
+<footer style="background-color:#0d0d0d; color:#fff; font-family:'Segoe UI',Arial,sans-serif; padding:60px 20px 20px; border-top:3px solid #0d6efd; box-shadow:0 -3px 15px rgba(0,0,0,0.3);">
+  <div class="container" style="max-width:1200px; margin:0 auto;">
+    <div class="row" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+      <div style="flex:1 1 250px; min-width:220px;">
+        <h2 style="font-weight:700; color:#0d6efd;">Hw Quran Academy</h2>
+        <p style="color:#aaa; line-height:1.8; margin-top:15px;">A global online platform to learn <strong>Quran, Arabic Grammar</strong>, and Islamic knowledge with qualified teachers.</p>
+        <p style="margin-top:10px;">📍 Online Global Platform</p>
+      </div>
+      <div style="flex:1 1 180px; min-width:160px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="../../stories/main.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0;">📖 Prophet Stories</a></li>
+          <li><a href="../../grammer/grammer.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0;">📚 Arabic Grammar</a></li>
+          <li><a href="../../grammer/tarjuma.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0;">📜 Quran Translation</a></li>
+          <li><a href="../../main pages/html/contact.html" style="color:#ccc; text-decoration:none; display:block; padding:6px 0;">📞 Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex:1 1 200px; min-width:180px;">
+        <h4 style="font-weight:600; margin-bottom:15px;">Contact</h4>
+        <p style="margin:8px 0;">✉️ info@hwquranacademy.com</p>
+        <p style="margin:8px 0;">🌐 https://hwquranacademy.netlify.app/</p>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.1); margin:30px 0;">
+    <div style="text-align:center; color:#777; font-size:14px;">
+      © 2025 <strong>Hw Quran Academy</strong> — All Rights Reserved | Designed with ❤️ for Islamic Education
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
