@@ -141,26 +141,26 @@
     <p class="mb-4">Unlock Knowledge. Embrace Light 🌿</p>
 
     <form id="loginForm" novalidate>
-      <div class="mb-3 text-start">
+      <!-- <div class="mb-3 text-start">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="tname" placeholder="Enter your name">
         <div class="error-text" id="nameError">⚠️ Please fill this field</div>
-      </div>
+      </div> -->
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="temail" placeholder="Enter your email">
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
         <div class="error-text" id="emailError">⚠️ Please fill this field</div>
       </div>
       <div class="mb-3 text-start">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="tpassword" placeholder="Enter your password">
+        <input type="password" class="form-control" id="password" placeholder="Enter your password">
         <div class="error-text" id="passwordError">⚠️ Please fill this field</div>
       </div>
       <button type="submit" class="btn btn-login w-100 mb-3" onclick="tlogin()">Login</button>
     </form>
 
     <div class="social-login mt-3">
-      <button type="button" class="btn btn-google" onclick="window.location.href='#',tloginwithgoogle()">
+      <button type="button" class="btn btn-google" onclick="window.location.href='#',loginWithGoogle()">
         <i class="fab fa-google"></i> Continue with Google
       </button>
       <br>

@@ -142,26 +142,26 @@
     <p class="mb-4">Unlock Knowledge. Embrace Light 🌿</p>
 
     <form id="loginForm" novalidate>
-      <div class="mb-3 text-start">
+      <!-- <div class="mb-3 text-start">
         <label for="name" class="form-label">Name</label>
-        <input type="text"  class="form-control" id="sname"  placeholder="Enter your name">
+        <input type="text"  class="form-control" id="name"  placeholder="Enter your name">
         <div class="error-text" id="nameError">⚠️ Please fill this field</div>
-      </div>
+      </div> -->
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="semail" placeholder="Enter your email">
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
         <div class="error-text" id="emailError">⚠️ Please fill this field</div>
       </div>
       <div class="mb-3 text-start">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="spassword" placeholder="Enter your password">
+        <input type="password" class="form-control" id="password" placeholder="Enter your password">
         <div class="error-text" id="passwordError">⚠️ Please fill this field</div>
       </div>
       <button type="submit" class="btn btn-login w-100 mb-3" onclick="slogin()">Login</button>
     </form>
 
     <div class="social-login mt-3">
-      <button type="button" class="btn btn-google" onclick="window.location.href='#' , sloginwithgoogle() ">
+      <button type="button" class="btn btn-google" onclick="window.location.href='#' , loginWithGoogle()">
         <i class="fab fa-google"></i> Continue with Google
       </button>
       <br>
@@ -174,9 +174,8 @@
 
   <script>
     const form = document.getElementById('loginForm');
-    const email = document.getElementById('semail');
-    const password = document.getElementById('spassword');
-    const name = document.getElementById('sname');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
     const nameError = document.getElementById('nameError');

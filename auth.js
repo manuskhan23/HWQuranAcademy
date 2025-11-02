@@ -13,50 +13,60 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 // console.log(app)
 const db = firebase.database();
-// const auth=firebase.auth();
+console.log(db)
+const auth=firebase.auth();
 const loginbtn=document.getElementById("login")
-const semail=document.getElementById("semail")
-const spassword=document.getElementById("spassword")
-const sname=document.getElementById("sname")
-const temail=document.getElementById("temail")
-const tpassword=document.getElementById("tpassword")
-const tname=document.getElementById("tname")
+const email=document.getElementById("email").value
+const password=document.getElementById("password").value
+const user_name=document.getElementById("name").value
 
-function slogin(){
+function signup(){
   try{
-    auth.signInWithEmailAndPassword(semail.value,spassword.value)
+    firebase.auth().createUserWithEmailAndPassword(email,password)
     .then(function (response){
       console.log(response)
+      const user_uid=response.user.uid;
+
+      const user_obg={
+        user_name:user_name,
+        password:password,
+        email:email
+      }
+
+      firebase.database().ref("manage_user/" + user_uid).set(user_obg)
+
+    })
+    .catch(function (err)  {
+      console.log(err)
     })
   }
   catch(err){
     console.log(err)
   }
 }
-function tlogin(){}
-function sloginwithgoogle(){}
-function tloginwithgoogle(){}
+function login(){}
+function loginwithgoogle(){}
 
 // contact
 function sendmsg(event) {
   event.preventDefault(); // Prevent form submission
 
   // Get form values
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const subject = document.getElementById("subject").value;
-  const msg = document.getElementById("massage").value;
+  const name = document.getElementById("cname").value;
+  const cemail = document.getElementById("cemail").value;
+  const phone = document.getElementById("cphone").value;
+  const subject = document.getElementById("csubject").value;
+  const msg = document.getElementById("cmassage").value;
 
   // Validate fields
-  if (!name || !email || !phone || !subject || !msg) {
+  if (!name || !cemail || !phone || !subject || !msg) {
     alert("Please fill all fields");
     return;
   }
 
   const contactData = {
     name,
-    email, 
+    cemail, 
     phone,
     subject,
     massage: msg,
