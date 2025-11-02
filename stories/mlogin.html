@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HW Quran Academy | Choose Login</title>
+  <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+
+  <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    :root {
+      --teacher-color: #00ffc6;
+      --student-color: #ffd740;
+    }
+    .container:hover{
+        transition: all 600ms ease-in-out;
+        transform: scale(1.05);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        border-width: 2.5px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+                  url('../images/Quran1.jpg') center/cover no-repeat;
+      backdrop-filter: blur(5px);
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--teacher-color);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @-webkit-keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}@keyframes slide-in-fwd-top{0%{-webkit-transform:translateZ(-1400px) translateY(-800px);transform:translateZ(-1400px) translateY(-800px);opacity:0}100%{-webkit-transform:translateZ(0) translateY(0);transform:translateZ(0) translateY(0);opacity:1}}
+body{-webkit-animation:slide-in-fwd-top .4s cubic-bezier(.25,.46,.45,.94) both;animation:slide-in-fwd-top .4s cubic-bezier(.25,.46,.45,.94) both}
+
+    /* LOGO STYLE (NO ROTATION) */
+    .logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--teacher-color);
+      margin-bottom: 20px;
+      box-shadow: 0 0 25px var(--teacher-color);
+      transition: 0.4s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 45px var(--teacher-color);
+    }
+
+    h1 {
+      color: white;
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 15px 20px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn i {
+      font-size: 22px;
+    }
+
+    .teacher-btn {
+      border: 2px solid var(--teacher-color);
+      color: var(--teacher-color);
+    }
+
+    .teacher-btn:hover {
+      background: var(--teacher-color);
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--teacher-color);
+    }
+
+    .student-btn {
+      border: 2px solid var(--student-color);
+      color: var(--student-color);
+    }
+
+    .student-btn:hover {
+      background: var(--student-color);
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--student-color);
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 20px;
+    }
+
+    @media (max-width: 500px) {
+      h1 { font-size: 22px; }
+      .btn { font-size: 16px; padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ✅ Attractive Logo without rotation -->
+    <img src="../images/logo.png" alt="HW Quran Logo" class="logo">
+
+    <h1>Welcome to HW Quran Academy</h1>
+    <p>Please choose your role to continue</p>
+    <a href="../login/html/t.html" style="text-decoration: none;">
+    <button class="btn teacher-btn">
+      <i class="fa-solid fa-chalkboard-user"></i> Login as Teacher
+    </button>
+    </a>
+
+    <a href="../login/html/s.html" style="text-decoration: none;">
+        <button class="btn student-btn" onclick="window.location.href='student-login.html'">
+      <i class="fa-solid fa-user-graduate"></i> Login as Student
+    </button>
+    </a>
+  </div>
+<!-- <script src="auth.js"></script> -->
+</body>
+</html>

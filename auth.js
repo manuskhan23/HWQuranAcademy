@@ -89,7 +89,7 @@ function  login(){
 function logout(){
   auth.signOut()
   loginbtn.innerHTML=`
-  <li class="nav-item list-unstyled mx-2" id="login"><a class="nav-link text-white" href="../mlogin.html">🔑 Login</a></li>
+  <li class="nav-item list-unstyled mx-2" id="login"><a class="nav-link text-white" href="mlogin.html">🔑 Login</a></li>
   `
   localStorage.removeItem("name")
 }
