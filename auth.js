@@ -1,4 +1,4 @@
-var firebaseConfig = {
+var firebaseConfig ={
     apiKey: "AIzaSyD_sKuSExdMVoIrxQJeNaDQuoCfUbhwKL8",
     authDomain: "quran-academy-eb7e6.firebaseapp.com",
     projectId: "quran-academy-eb7e6",
@@ -10,22 +10,22 @@ var firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.database();
+var app = firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+var db = firebase.database();
 console.log(app);
 // console.log(auth);
 console.log(db);
 
 
-const sname=document.getElementById('name').value;
-const email=document.getElementById('email').value;
-const password=document.getElementById('password').value;
-const loginbtn=document.getElementById("login").value
+var sname=document.getElementById('name').value;
+var email=document.getElementById('email').value;
+var password=document.getElementById('password').value;
+var loginbtn=document.getElementById("login")
 
 function signup(){
   try{
-    const dbsignup={
+    var dbsignup={
       name:sname,
       email:email,
       password:password
@@ -34,9 +34,7 @@ function signup(){
     firebase.database().ref("auth").push(dbsignup)
 
 
-
-    auth
-    .createUserWithEmailAndPassword(email,password)
+    firebaseauth.createUserWithEmailAndPassword(email,password)
 
     .then(function (response) {
       console.log(response);
@@ -67,7 +65,7 @@ function signup(){
 function  login(){
   try{
 
-    auth.signInWithEmailAndPassword(email,password)
+    firebase.auth().signInWithEmailAndPassword(email,password)
     .then(function (response){
       console.log(response);
     })
@@ -95,7 +93,7 @@ function logout(){
 }
 
 function loginWithGoogle(){
-  const provider=new firebase.auth.GoogleAuthProvider();
+  var provider=new firebase.auth().GoogleAuthProvider();
   firebase
   .auth()
   .signInWithPopup(provider)
@@ -113,13 +111,13 @@ function sendmsg(event) {
   try{
     alert("Message sent successfully ")
     event.preventDefault();
-    const cname = document.getElementById('cname').value;
-    const cemail = document.getElementById('cemail').value;
-    const cmsg = document.getElementById('cmessage').value;
-    const cphone = document.getElementById('cphone').value;
-    const csubject = document.getElementById('csubject').value;
+    var cname = document.getElementById('cname').value;
+    var cemail = document.getElementById('cemail').value;
+    var cmsg = document.getElementById('cmessage').value;
+    var cphone = document.getElementById('cphone').value;
+    var csubject = document.getElementById('csubject').value;
     
-    const user_obj = {
+    var user_obj = {
         name: cname,
         email: cemail,
         message: cmsg,
